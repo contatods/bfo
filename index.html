@@ -50,7 +50,7 @@
         }
         .live-dot { width: 6px; height: 6px; background-color: #FF3D00; border-radius: 50%; }
 
-        /* Quick Actions - Updated for 4 items */
+        /* Quick Actions */
         .quick-actions {
             display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; padding: 15px;
             background: var(--bg-card); border-bottom: 1px solid var(--border);
@@ -199,7 +199,7 @@
             <span class="action-text">Leaderboard</span>
         </a>
         <a href="https://forms.gle/Y75pBxZMQo7FNGVg7" target="_blank" class="action-btn">
-            <svg class="action-icon" viewBox="0 0 24 24"><path class="dt-secondary" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/><path class="dt-primary" d="M17 7h-4v2h4V7zm0 4h-4v2h4v-2zm0 4h-4v2h4v-2zM7 7h2v2H7V7zm0 4h2v2H7v-2zm0 4h2v2H7v-2z"/></svg>
+            <svg class="action-icon" viewBox="0 0 24 24"><path class="dt-secondary" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/><path class="dt-primary" d="M17 7h-4v2h4V7zm0 4h-4v2h4v-2zm0 4h-4v2h4v-2zM7 7h2v2H7V7zm0 4h2v2H7v-2zm0 4h2v2H7v-2zM7 7h2v2H7V7zm0 4h2v2H7v-2zm0 4h2v2H7v-2z"/></svg>
             <span class="action-text">Revisão</span>
         </a>
         <a href="https://panel.digitalscore.com.br/" target="_blank" class="action-btn">
@@ -444,8 +444,22 @@
             { day: 'sabado', time: '16:59', warmup: '16:44', queue: '17:09', cap: "10'", cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#5', wodName: 'Charter', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }] },
             { day: 'sabado', time: '17:19', warmup: '16:59', queue: '17:24', cap: "10'", cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#5', wodName: 'Charter', athletes: [{ lane: '-', num: '', name: 'Top Atletas', box: '-' }] },
 
-            // --- DOMINGO (14/12) - Placeholder ---
-            { day: 'domingo', time: '-', cat: 'Aguardando', tags: [], workout: '', athletes: [] }
+            // --- DOMINGO (14/12) MANHÃ (Fuego) ---
+            { day: 'domingo', time: '08:00', warmup: '07:20', queue: '07:45', cap: "14'", cat: 'Quarteto Scaled Misto (Single Heat)', tags: ['scaled'], workout: '#6', wodName: 'Fuego', athletes: [{ lane: '-', num: '', name: 'Definido pelo Ranking', box: '-' }] },
+            { day: 'domingo', time: '08:24', warmup: '07:44', queue: '08:09', cap: "14'", cat: 'Quarteto Intermediario Misto (Single Heat)', tags: ['inter'], workout: '#6', wodName: 'Fuego', athletes: [{ lane: '-', num: '', name: 'Definido pelo Ranking', box: '-' }] },
+            { day: 'domingo', time: '08:43', warmup: '08:03', queue: '08:28', cap: "14'", cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#6', wodName: 'Fuego', athletes: [{ lane: '-', num: '', name: 'Definido pelo Ranking', box: '-' }] },
+            { day: 'domingo', time: '09:02', warmup: '08:22', queue: '08:47', cap: "14'", cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#6', wodName: 'Fuego', athletes: [{ lane: '-', num: '', name: 'Definido pelo Ranking', box: '-' }] },
+            { day: 'domingo', time: '09:31', warmup: '08:51', queue: '09:16', cap: "14'", cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx'], workout: '#6', wodName: 'Fuego', athletes: [{ lane: '-', num: '', name: 'Definido pelo Ranking', box: '-' }] },
+            { day: 'domingo', time: '09:50', warmup: '09:10', queue: '09:35', cap: "14'", cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#6', wodName: 'Fuego', athletes: [{ lane: '-', num: '', name: 'Definido pelo Ranking', box: '-' }] },
+            { day: 'domingo', time: '10:09', warmup: '09:29', queue: '09:54', cap: "14'", cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#6', wodName: 'Fuego', athletes: [{ lane: '-', num: '', name: 'Definido pelo Ranking', box: '-' }] },
+
+            // --- DOMINGO (14/12) TARDE (Final) ---
+            { day: 'domingo', time: '10:28', warmup: '09:48', queue: '10:13', cap: "29'", cat: 'Quarteto Scaled Misto (Final Heat)', tags: ['scaled'], workout: '#7', wodName: 'Final / Elimination', athletes: [{ lane: '-', num: '', name: 'Finalistas', box: '-' }] },
+            { day: 'domingo', time: '11:07', warmup: '10:27', queue: '10:52', cap: "29'", cat: 'Quarteto Intermediario Misto (Final Heat)', tags: ['inter'], workout: '#7', wodName: 'Final / Elimination', athletes: [{ lane: '-', num: '', name: 'Finalistas', box: '-' }] },
+            { day: 'domingo', time: '11:46', warmup: '11:06', queue: '11:31', cap: "29'", cat: 'Dupla Rx Mista (Final Heat)', tags: ['rx'], workout: '#7', wodName: 'Final / Elimination', athletes: [{ lane: '-', num: '', name: 'Finalistas', box: '-' }] },
+            { day: 'domingo', time: '12:25', warmup: '11:45', queue: '12:10', cap: "29'", cat: 'Dupla Rx Masculina (Final Heat)', tags: ['rx'], workout: '#7', wodName: 'Final / Elimination', athletes: [{ lane: '-', num: '', name: 'Finalistas', box: '-' }] },
+            { day: 'domingo', time: '13:04', warmup: '12:24', queue: '12:49', cap: "23'", cat: 'Elite Feminino (Final Heat)', tags: ['elite'], workout: '#7', wodName: 'Final / Elimination', athletes: [{ lane: '-', num: '', name: 'Finalistas', box: '-' }] },
+            { day: 'domingo', time: '13:37', warmup: '12:57', queue: '13:22', cap: "23'", cat: 'Elite Masculino (Final Heat)', tags: ['elite'], workout: '#7', wodName: 'Final / Elimination', athletes: [{ lane: '-', num: '', name: 'Finalistas', box: '-' }] }
         ];
 
         let currentDay = 'sexta';
@@ -457,11 +471,6 @@
                 const container = document.getElementById('timeline-container');
                 container.innerHTML = '';
 
-                if (currentDay === 'domingo' && scheduleData.filter(i => i.day === 'domingo' && i.time !== '-').length === 0) {
-                     container.innerHTML = `<div class="empty-msg">A programação de Domingo será liberada em breve.</div>`;
-                     return;
-                }
-                
                 let filtered = scheduleData.filter(item => {
                     const dayMatch = item.day === currentDay;
                     const catMatch = currentCat === 'all' ? true : item.tags.includes(currentCat);
