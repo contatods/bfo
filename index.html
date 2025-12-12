@@ -125,10 +125,10 @@
 
         .heat-info h3 { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.2; }
         
-        /* LOGISTICS BAR (New Visual) */
+        /* LOGISTICS BAR */
         .logistics-bar {
             display: flex; gap: 12px; font-size: 0.75rem; background: #252525;
-            padding: 4px 8px; border-radius: 4px; display: inline-flex; margin-bottom: 4px;
+            padding: 4px 8px; border-radius: 4px; display: inline-flex; margin-bottom: 6px;
         }
         .log-item { display: flex; align-items: center; gap: 4px; font-weight: 600; }
         .icon-warmup { fill: var(--color-warmup); }
@@ -136,7 +136,15 @@
         .icon-queue { fill: var(--color-queue); }
         .text-queue { color: var(--color-queue); }
 
-        .heat-meta { font-size: 0.7rem; color: #666; margin-top: 4px; }
+        .heat-meta { font-size: 0.75rem; color: #888; display: flex; align-items: center; gap: 8px; }
+        
+        /* Workout Tag with Name */
+        .workout-tag {
+            font-size: 0.7rem; color: var(--primary); border: 1px solid rgba(255, 109, 0, 0.3);
+            padding: 1px 6px; border-radius: 4px; font-weight: 700; text-transform: uppercase;
+            display: inline-flex; align-items: center; gap: 4px;
+        }
+        .workout-name { color: #fff; font-weight: 400; text-transform: none; margin-left: 2px; }
 
         .chevron { width: 18px; height: 18px; fill: #555; transition: 0.3s; }
         .heat-card.open .chevron { transform: rotate(180deg); fill: var(--primary); }
@@ -184,7 +192,7 @@
 
     <div class="quick-actions">
         <a href="https://forms.gle/Y75pBxZMQo7FNGVg7" target="_blank" class="action-btn">
-            <svg class="action-icon" viewBox="0 0 24 24"><path class="dt-secondary" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/><path class="dt-primary" d="M17 7h-4v2h4V7zm0 4h-4v2h4v-2zm0 4h-4v2h4v-2zM7 7h2v2H7V7zm0 4h2v2H7v-2zm0 4h2v2H7v-2z"/></svg>
+            <svg class="action-icon" viewBox="0 0 24 24"><path class="dt-secondary" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/><path class="dt-primary" d="M17 7h-4v2h4V7zm0 4h-4v2h4v-2zm0 4h-4v2h4v-2zM7 7h2v2H7V7zm0 4h2v2H7v-2zm0 4h2v2H7v-2zM7 7h2v2H7V7zm0 4h2v2H7v-2zm0 4h2v2H7v-2z"/></svg>
             <span class="action-text">Revisão</span>
         </a>
         <a href="https://leaderboard.digitalscore.com.br/full/348" target="_blank" class="action-btn">
@@ -228,12 +236,12 @@
     <footer>BFO 2025 • Powered by Digital Score</footer>
 
     <script>
-        /* DADOS OFICIAIS EXTRAÍDOS DOS PDFS (FONTES 7, 63) */
+        /* DADOS OFICIAIS COM NOMES DOS WORKOUTS (FONTES 7, 63, 395) */
         const scheduleData = [
             // --- SEXTA FEIRA (12/12) ---
             { 
                 day: 'sexta', time: '18:00', warmup: '17:20', queue: '17:45', 
-                cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx', 'mista'], workout: '#1', 
+                cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx', 'mista'], workout: '#1', wodName: 'Load Management',
                 athletes: [
                     { lane: 2, num: '307', name: 'TEAM PUNK', box: 'PUNK CROSSFIT' },
                     { lane: 3, num: '308', name: 'TEAM NACAO', box: 'NACAO CROSSFIT' },
@@ -249,7 +257,7 @@
             },
             { 
                 day: 'sexta', time: '18:30', warmup: '17:50', queue: '18:15', 
-                cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx', 'mista', 'masc'], workout: '#1', 
+                cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx', 'mista', 'masc'], workout: '#1', wodName: 'Load Management',
                 athletes: [
                     { lane: 2, num: '301', name: 'SCHAMNE COMP', box: 'BLOCK COMMUNITY FITNESS' },
                     { lane: 3, num: '302', name: 'TEAM HERCULES', box: 'CROSSFIT RIVEN' },
@@ -264,7 +272,7 @@
             },
             { 
                 day: 'sexta', time: '19:00', warmup: '18:20', queue: '18:45', 
-                cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx', 'masc'], workout: '#1', 
+                cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx', 'masc'], workout: '#1', wodName: 'Load Management',
                 athletes: [
                     { lane: 2, num: '401', name: 'TEAM STRONG MONKEY', box: 'HERCULES FUNCTIONAL' },
                     { lane: 3, num: '402', name: 'TEAM GARRA / ZERO 2', box: 'GARRA CROSS / HERCULES FUNCTIONAL' },
@@ -280,7 +288,7 @@
             },
             { 
                 day: 'sexta', time: '19:30', warmup: '18:50', queue: '19:15', 
-                cat: 'Elite Feminino (Single Heat)', tags: ['elite', 'fem'], workout: '#1', 
+                cat: 'Elite Feminino (Single Heat)', tags: ['elite', 'fem'], workout: '#1', wodName: 'Load Management',
                 athletes: [
                     { lane: 1, num: '201', name: 'ISADORA MORENO', box: 'CROSS FORCE' },
                     { lane: 2, num: '202', name: 'THAYS FRANCA', box: 'CROSSFIT CASINHA VERDE' },
@@ -298,7 +306,7 @@
             },
             { 
                 day: 'sexta', time: '20:00', warmup: '19:20', queue: '19:45', 
-                cat: 'Elite Masculino (Single Heat)', tags: ['elite', 'masc'], workout: '#1', 
+                cat: 'Elite Masculino (Single Heat)', tags: ['elite', 'masc'], workout: '#1', wodName: 'Load Management',
                 athletes: [
                     { lane: 1, num: '101', name: 'VITOR LOFFI WAWRZENIAK', box: 'INDEPENTE' },
                     { lane: 2, num: '102', name: 'RICARDO MARQUEZ', box: 'CROSSFIT BE HAPPY' },
@@ -318,7 +326,7 @@
             // --- SABADO (13/12) MANHÃ ---
             { 
                 day: 'sabado', time: '08:00', warmup: '07:20', queue: '07:45', 
-                cat: 'Quarteto Scaled Misto (Single Heat)', tags: ['scaled'], workout: '#1', 
+                cat: 'Quarteto Scaled Misto (Single Heat)', tags: ['scaled'], workout: '#1', wodName: 'Load Management',
                 athletes: [
                     { lane: 1, num: '601', name: 'PESO, PENA, FORCA E FOLGA', box: 'HERA CF' },
                     { lane: 2, num: '602', name: '1 BRUTA 3 MANE', box: 'MST CROSSBOX' },
@@ -335,7 +343,7 @@
             },
             { 
                 day: 'sabado', time: '08:30', warmup: '07:50', queue: '08:15', 
-                cat: 'Quarteto Intermediario Misto (Single Heat)', tags: ['inter'], workout: '#1', 
+                cat: 'Quarteto Intermediario Misto (Single Heat)', tags: ['inter'], workout: '#1', wodName: 'Load Management',
                 athletes: [
                     { lane: 3, num: '501', name: 'CROSSFIT PARK EXTREME', box: 'CROSSFIT PARK EXTREME' },
                     { lane: 4, num: '502', name: 'TEAM MACHADO', box: 'MACHADO CROSSFIT' },
@@ -347,14 +355,14 @@
                 ]
             },
             // Manhã WOD 2/3 (Placeholder Ranking)
-            { day: 'sabado', time: '09:05', warmup: '08:25', queue: '08:50', cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#2', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
-            { day: 'sabado', time: '09:23', warmup: '08:43', queue: '09:08', cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#2', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
-            { day: 'sabado', time: '09:36', warmup: '08:56', queue: '09:21', cat: 'Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#2', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
-            { day: 'sabado', time: '09:54', warmup: '09:14', queue: '09:39', cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#2/3', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
-            { day: 'sabado', time: '10:09', warmup: '09:29', queue: '09:54', cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#2/3', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
+            { day: 'sabado', time: '09:05', warmup: '08:25', queue: '08:50', cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#2', wodName: 'WOD 2', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
+            { day: 'sabado', time: '09:23', warmup: '08:43', queue: '09:08', cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#2', wodName: 'WOD 2', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
+            { day: 'sabado', time: '09:36', warmup: '08:56', queue: '09:21', cat: 'Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#2', wodName: 'WOD 2', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
+            { day: 'sabado', time: '09:54', warmup: '09:14', queue: '09:39', cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#2/3', wodName: 'WOD 2 & 3', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
+            { day: 'sabado', time: '10:09', warmup: '09:29', queue: '09:54', cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#2/3', wodName: 'WOD 2 & 3', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
             { 
                 day: 'sabado', time: '10:29', warmup: '09:49', queue: '10:14', 
-                cat: 'Quarteto Scaled Misto (Heat 1)', tags: ['scaled'], workout: '#2/3', 
+                cat: 'Quarteto Scaled Misto (Heat 1)', tags: ['scaled'], workout: '#2/3', wodName: 'WOD 2 & 3', 
                 athletes: [
                     { lane: 1, num: '601', name: 'PESO, PENA, FORCA...', box: 'HERA CF' },
                     { lane: 2, num: '602', name: '1 BRUTA 3 MANE', box: 'MST CROSSBOX' },
@@ -371,7 +379,7 @@
             },
              { 
                 day: 'sabado', time: '10:46', warmup: '10:06', queue: '10:31', 
-                cat: 'Quarteto Intermediario Misto (Heat 2)', tags: ['inter'], workout: '#2/3', 
+                cat: 'Quarteto Intermediario Misto (Heat 2)', tags: ['inter'], workout: '#2/3', wodName: 'WOD 2 & 3', 
                 athletes: [
                     { lane: 3, num: '501', name: 'CROSSFIT PARK EXTREME', box: 'CF PARK EXTREME' },
                     { lane: 4, num: '502', name: 'TEAM MACHADO', box: 'MACHADO CF' },
@@ -384,55 +392,55 @@
             },
 
             // --- FITNESS RACE (MEIO DIA) ---
-            { day: 'sabado', time: '12:00', cat: 'Open (Heat 1)', tags: ['fr'], workout: 'FR', athletes: [
+            { day: 'sabado', time: '12:00', cat: 'Open (Heat 1)', tags: ['fr'], workout: 'FR', wodName: 'Fitness Race', athletes: [
                 { lane: 1, num: '209', name: 'TEAM FUSAO', box: 'CROSSFIT BLUE STORM' },
                 { lane: 2, num: '210', name: 'VALERIA E GABRIEL', box: 'KAPELA GYM' },
                 { lane: 3, num: '211', name: 'TEAM SAVANAH', box: 'HOME BOX' },
                 { lane: 4, num: '212', name: 'BARBARA E SERGIO', box: 'CROSSFIT PARK EXTREME' }
             ]},
-            { day: 'sabado', time: '12:10', cat: 'Open (Heat 2)', tags: ['fr'], workout: 'FR', athletes: [
+            { day: 'sabado', time: '12:10', cat: 'Open (Heat 2)', tags: ['fr'], workout: 'FR', wodName: 'Fitness Race', athletes: [
                 { lane: 1, num: '205', name: 'DUPLA RESILIENTE', box: 'CF COSTA' },
                 { lane: 2, num: '206', name: 'TEAM KAPELA GYM', box: 'KAPELA GYM' },
                 { lane: 3, num: '207', name: 'ELITE TRAINING CENTER', box: 'ELITE TRAINING CENTER' },
                 { lane: 4, num: '208', name: 'KAMUSKAZE', box: 'KAMUS' }
             ]},
-            { day: 'sabado', time: '12:20', cat: 'Open (Heat 3)', tags: ['fr'], workout: 'FR', athletes: [
+            { day: 'sabado', time: '12:20', cat: 'Open (Heat 3)', tags: ['fr'], workout: 'FR', wodName: 'Fitness Race', athletes: [
                 { lane: 1, num: '201', name: 'LAIS/GUSTAVO', box: 'HERA' },
                 { lane: 2, num: '202', name: 'WAKANDA', box: 'AGBARA GYM' },
                 { lane: 3, num: '203', name: 'BRUCTUS', box: 'BRUCTUS' },
                 { lane: 4, num: '204', name: 'M&M: MILAGRE E MISERICORDIA', box: 'ELITE TRAINING CENTER' }
             ]},
-            { day: 'sabado', time: '12:30', cat: 'Pro (Heat 1)', tags: ['fr'], workout: 'FR', athletes: [
+            { day: 'sabado', time: '12:30', cat: 'Pro (Heat 1)', tags: ['fr'], workout: 'FR', wodName: 'Fitness Race', athletes: [
                 { lane: 1, num: '107', name: 'KAMUS', box: 'CF KAMUS' },
                 { lane: 2, num: '108', name: 'CROSSFIT WAYA', box: 'CROSSFIT WAYA' },
                 { lane: 3, num: '109', name: 'TEAM ELITE', box: 'ELITE CROSS FITNESS' }
             ]},
-            { day: 'sabado', time: '12:40', cat: 'Pro (Heat 2)', tags: ['fr'], workout: 'FR', athletes: [
+            { day: 'sabado', time: '12:40', cat: 'Pro (Heat 2)', tags: ['fr'], workout: 'FR', wodName: 'Fitness Race', athletes: [
                 { lane: 1, num: '104', name: 'MISTAPROFIT', box: 'CENTAURUS' },
                 { lane: 2, num: '105', name: 'UNBROKEN', box: 'UNBROKEN' },
                 { lane: 3, num: '106', name: 'PEDRO E RENATA', box: 'CROSSFIT BLUE STORM' }
             ]},
-            { day: 'sabado', time: '12:50', cat: 'Pro (Heat 3)', tags: ['fr'], workout: 'FR', athletes: [
+            { day: 'sabado', time: '12:50', cat: 'Pro (Heat 3)', tags: ['fr'], workout: 'FR', wodName: 'Fitness Race', athletes: [
                 { lane: 1, num: '101', name: 'CHRISTIAN E FERNANDA', box: 'HERA CF/CROWN FORMOSA' },
                 { lane: 2, num: '102', name: 'ELITE TRAINING CENTER', box: 'ELITE TRAINING CENTER' },
                 { lane: 3, num: '103', name: 'IRON SUPPS', box: 'WOHALI' }
             ]},
 
             // --- SABADO (13/12) TARDE (Clean Karma) ---
-            { day: 'sabado', time: '13:50', warmup: '11:20', queue: '11:45', cat: 'Quarteto Scaled Misto (Single Heat)', tags: ['scaled'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
-            { day: 'sabado', time: '14:12', warmup: '13:50', queue: '14:15', cat: 'Quarteto Intermediario Misto (Single Heat)', tags: ['inter'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
-            { day: 'sabado', time: '14:29', warmup: '14:12', queue: '14:37', cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
-            { day: 'sabado', time: '14:46', warmup: '14:29', queue: '14:54', cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
-            { day: 'sabado', time: '15:13', warmup: '14:46', queue: '15:11', cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
-            { day: 'sabado', time: '15:30', warmup: '15:13', queue: '15:38', cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
-            { day: 'sabado', time: '15:47', warmup: '15:30', queue: '15:55', cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
+            { day: 'sabado', time: '13:50', warmup: '11:20', queue: '11:45', cat: 'Quarteto Scaled Misto (Single Heat)', tags: ['scaled'], workout: '#4', wodName: 'Clean Karma', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
+            { day: 'sabado', time: '14:12', warmup: '13:50', queue: '14:15', cat: 'Quarteto Intermediario Misto (Single Heat)', tags: ['inter'], workout: '#4', wodName: 'Clean Karma', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
+            { day: 'sabado', time: '14:29', warmup: '14:12', queue: '14:37', cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#4', wodName: 'Clean Karma', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
+            { day: 'sabado', time: '14:46', warmup: '14:29', queue: '14:54', cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#4', wodName: 'Clean Karma', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
+            { day: 'sabado', time: '15:13', warmup: '14:46', queue: '15:11', cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx'], workout: '#4', wodName: 'Clean Karma', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
+            { day: 'sabado', time: '15:30', warmup: '15:13', queue: '15:38', cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#4', wodName: 'Clean Karma', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
+            { day: 'sabado', time: '15:47', warmup: '15:30', queue: '15:55', cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#4', wodName: 'Clean Karma', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
 
             // --- SABADO (13/12) FINAL DE TARDE (Charter) ---
-            { day: 'sabado', time: '16:14', warmup: '15:47', queue: '16:12', cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#5', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }] },
-            { day: 'sabado', time: '16:29', warmup: '16:14', queue: '16:39', cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#5', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }] },
-            { day: 'sabado', time: '16:44', warmup: '16:29', queue: '16:54', cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx'], workout: '#5', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }] },
-            { day: 'sabado', time: '16:59', warmup: '16:44', queue: '17:09', cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#5', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }] },
-            { day: 'sabado', time: '17:19', warmup: '16:59', queue: '17:24', cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#5', athletes: [{ lane: '-', num: '', name: 'Top Atletas', box: '-' }] },
+            { day: 'sabado', time: '16:14', warmup: '15:47', queue: '16:12', cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#5', wodName: 'Charter', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }] },
+            { day: 'sabado', time: '16:29', warmup: '16:14', queue: '16:39', cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#5', wodName: 'Charter', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }] },
+            { day: 'sabado', time: '16:44', warmup: '16:29', queue: '16:54', cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx'], workout: '#5', wodName: 'Charter', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }] },
+            { day: 'sabado', time: '16:59', warmup: '16:44', queue: '17:09', cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#5', wodName: 'Charter', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }] },
+            { day: 'sabado', time: '17:19', warmup: '16:59', queue: '17:24', cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#5', wodName: 'Charter', athletes: [{ lane: '-', num: '', name: 'Top Atletas', box: '-' }] },
 
             // --- DOMINGO (14/12) - Placeholder ---
             { day: 'domingo', time: '-', cat: 'Aguardando', tags: [], workout: '', athletes: [] }
@@ -520,6 +528,14 @@
                         `;
                     }
 
+                    // Workout Tag
+                    let wodTag = `
+                        <span class="workout-tag">
+                            ${item.workout}
+                            ${item.wodName ? `<span class="workout-name">| ${item.wodName}</span>` : ''}
+                        </span>
+                    `;
+
                     card.innerHTML = `
                         <div class="heat-header" onclick="toggleDetails(this)">
                             <div class="time-box">
@@ -531,7 +547,7 @@
                                 ${logisticBar}
                                 <div class="heat-meta">
                                     <span>${item.athletes.length} raias</span>
-                                    <span class="workout-tag">${item.workout}</span>
+                                    ${wodTag}
                                 </div>
                             </div>
                             <svg class="chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
@@ -580,7 +596,8 @@
             }
         }
 
-        render();
+        // Inicializa
+        window.onload = render;
     </script>
 </body>
 </html>
