@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BFO Live • Digital Score</title>
+    <style>
+        :root {
+            --primary: #FF6D00;
+            --bg-body: #050505;
+            --bg-card: #141414;
+            --bg-header: #000000;
+            --text-main: #ffffff;
+            --text-sec: #9e9e9e;
+            --border: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 90px; }
+
+        header {
+            background-color: var(--bg-header);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(255, 109, 0, 0.1);
+        }
+        .logo-img { height: 35px; width: auto; }
+        .live-badge { 
+            background: rgba(255, 61, 0, 0.2); 
+            color: #FF3D00; 
+            padding: 4px 10px; 
+            border-radius: 4px; 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            letter-spacing: 1px;
+            border: 1px solid rgba(255, 61, 0, 0.5);
+            animation: pulse 2s infinite; 
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .live-dot { width: 6px; height: 6px; background-color: #FF3D00; border-radius: 50%; }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            padding: 15px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+        }
+        .action-btn {
+            background: #1f1f1f;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .action-btn:active { transform: scale(0.95); border-color: var(--primary); }
+        .action-icon { width: 24px; height: 24px; margin-bottom: 5px; fill: var(--primary); }
+        .action-text { font-size: 0.7rem; color: var(--text-sec); font-weight: 500; text-align: center; }
+
+        .controls-wrapper {
+            position: sticky;
+            top: 66px;
+            z-index: 90;
+            background: var(--bg-body);
+            padding-bottom: 5px;
+            border-bottom: 1px solid #222;
+        }
+
+        .search-container { padding: 10px 15px 5px 15px; }
+        .search-input-wrapper {
+            position: relative;
+            background: #222;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .search-icon-inside {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            fill: var(--text-sec);
+        }
+        .search-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 12px 12px 12px 38px;
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .date-tabs { display: flex; padding: 10px 15px; gap: 10px; }
+        .date-btn {
+            background: transparent;
+            color: var(--text-sec);
+            border: 1px solid var(--border);
+            padding: 8px 0;
+            border-radius: 6px;
+            font-weight: 700;
+            flex: 1;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .date-btn.active {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .category-scroll {
+            display: flex;
+            overflow-x: auto;
+            padding: 0 15px 10px 15px;
+            gap: 8px;
+            scrollbar-width: none;
+        }
+        .category-scroll::-webkit-scrollbar { display: none; }
+        
+        .cat-pill {
+            background: #222;
+            color: #fff;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .cat-pill.active {
+            border-color: var(--primary);
+            background: rgba(255, 109, 0, 0.15);
+            color: var(--primary);
+        }
+
+        .timeline { padding: 10px 15px; min-height: 50vh; }
+        
+        .heat-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .heat-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: var(--primary);
+        }
+        .heat-card.fr::before { background: #E91E63; } 
+        .heat-card.fr .workout-tag { color: #E91E63; border-color: rgba(233,30,99,0.3); }
+
+        .heat-header {
+            padding: 15px;
+            display: grid;
+            grid-template-columns: 55px 1fr 24px;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #333;
+            padding-right: 10px;
+            margin-right: 10px;
+        }
+        .time-val { font-size: 1.1rem; font-weight: 800; color: #fff; }
+        .time-label { font-size: 0.6rem; color: var(--text-sec); text-transform: uppercase; }
+
+        .heat-info h3 { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.2; }
+        .heat-meta { font-size: 0.75rem; color: var(--text-sec); display: flex; align-items: center; gap: 8px; }
+        
+        .workout-tag {
+            font-size: 0.65rem;
+            color: var(--primary);
+            border: 1px solid rgba(255, 109, 0, 0.3);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .chevron { width: 20px; height: 20px; fill: var(--text-sec); transition: 0.3s; }
+        .heat-card.open .chevron { transform: rotate(180deg); fill: var(--primary); }
+
+        .heat-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #1a1a1a;
+        }
+        .heat-card.open .heat-details { max-height: 2000px; border-top: 1px solid #333; }
+
+        .athlete-row {
+            display: grid;
+            grid-template-columns: 40px 1fr;
+            padding: 12px 15px;
+            border-bottom: 1px solid #2a2a2a;
+            align-items: center;
+        }
+        .athlete-row:last-child { border-bottom: none; }
+        
+        .lane-box {
+            width: 28px; height: 28px;
+            background: #333;
+            color: #aaa;
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.8rem;
+        }
+        .ath-info { display: flex; flex-direction: column; }
+        
+        .ath-header { display: flex; align-items: center; gap: 6px; }
+        .ath-num { 
+            color: var(--primary); 
+            font-weight: 700; 
+            font-size: 0.8rem; 
+            background: rgba(255, 109, 0, 0.1); 
+            padding: 1px 4px; 
+            border-radius: 3px; 
+        }
+        .ath-name { font-weight: 600; font-size: 0.9rem; color: #eee; }
+        .ath-box { font-size: 0.75rem; color: var(--text-sec); margin-top: 2px; }
+
+        footer { text-align: center; padding: 20px; color: #444; font-size: 0.7rem; }
+        .empty-msg { text-align: center; color: var(--text-sec); padding: 40px; font-style: italic; opacity: 0.7; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+        .dt-primary { fill: var(--primary); }
+        .dt-secondary { fill: #fff; opacity: 0.4; }
+        
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://digitalscore.z22.web.core.windows.net/Img/digital-score_logo.png" alt="Digital Score" class="logo-img">
+        <div class="live-badge"><div class="live-dot"></div> AO VIVO</div>
+    </header>
+
+    <div class="quick-actions">
+        <a href="https://forms.gle/Y75pBxZMQo7FNGVg7" target="_blank" class="action-btn">
+            <svg class="action-icon" viewBox="0 0 24 24"><path class="dt-secondary" d="M19 3H5c-1.1 0-2 .9-2 2v1c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/><path class="dt-primary" d="M17 7h-4v2h4V7zm0 4h-4v2h4v-2zm0 4h-4v2h4v-2zM7 7h2v2H7V7zm0 4h2v2H7v-2zm0 4h2v2H7v-2zM7 7h2v2H7V7zm0 4h2v2H7v-2zm0 4h2v2H7v-2z"/></svg>
+            <span class="action-text">Revisão</span>
+        </a>
+        <a href="https://leaderboard.digitalscore.com.br/full/348" target="_blank" class="action-btn">
+            <svg class="action-icon" viewBox="0 0 24 24"><path class="dt-secondary" d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/><path class="dt-primary" d="M12 4c-3.1 0-5.6 2.3-6 5.3L12 17l6-7.7C17.6 6.3 15.1 4 12 4z"/></svg>
+            <span class="action-text">Leaderboard</span>
+        </a>
+        <a href="https://panel.digitalscore.com.br/" target="_blank" class="action-btn">
+            <svg class="action-icon" viewBox="0 0 24 24"><path class="dt-secondary" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/><path class="dt-primary" d="M12 12c-2 0-4 1-4 3 0 1 1.5 2 4 2s4-1 4-2c0-2-2-3-4-3z"/></svg>
+            <span class="action-text">Painel</span>
+        </a>
+    </div>
+
+    <div class="controls-wrapper">
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <svg class="search-icon-inside" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                <input type="text" class="search-input" placeholder="Buscar atleta ou número..." oninput="updateSearch(this.value)">
+            </div>
+        </div>
+
+        <div class="date-tabs">
+            <button id="btn-sexta" class="date-btn active" onclick="setDay('sexta')">Sexta (12)</button>
+            <button id="btn-sabado" class="date-btn" onclick="setDay('sabado')">Sábado (13)</button>
+            <button id="btn-domingo" class="date-btn" onclick="setDay('domingo')">Domingo (14)</button>
+        </div>
+
+        <div class="category-scroll">
+            <button id="cat-all" class="cat-pill active" onclick="filterCategory('all', this)">Todos</button>
+            <button id="cat-elite" class="cat-pill" onclick="filterCategory('elite', this)">Elite</button>
+            <button id="cat-rx" class="cat-pill" onclick="filterCategory('rx', this)">Rx</button>
+            <button id="cat-scaled" class="cat-pill" onclick="filterCategory('scaled', this)">Scaled</button>
+            <button id="cat-inter" class="cat-pill" onclick="filterCategory('inter', this)">Intermed.</button>
+            <button id="cat-fr" class="cat-pill" onclick="filterCategory('fr', this)">Fitness Race</button>
+        </div>
+    </div>
+
+    <div id="timeline-container" class="timeline">
+        <div style="padding:40px; text-align:center; color:#666;">Carregando... (Se não mudar, ocorreu um erro de Script)</div>
+    </div>
+
+    <footer>BFO 2025 • Powered by Digital Score</footer>
+
+    <script>
+        // --- DADOS (VALIDADOS E LIMPOS) ---
+        const scheduleData = [
+            // SEXTA
+            { day: 'sexta', time: '18:00', cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx', 'mista'], workout: '#1', athletes: [
+                { lane: 2, num: '307', name: 'TEAM PUNK', box: 'PUNK CROSSFIT' },
+                { lane: 3, num: '308', name: 'TEAM NACAO', box: 'NACAO CROSSFIT' },
+                { lane: 4, num: '309', name: 'TEAM KAPELA', box: 'KAPELA GYM' },
+                { lane: 5, num: '310', name: 'KAPELA GYM/HERCULES', box: 'KAPELA GYM' },
+                { lane: 6, num: '311', name: 'ADRIANO E BIANCA', box: 'MACAW CF' },
+                { lane: 7, num: '312', name: 'TEAM KAMUS', box: 'CF KAMUS' },
+                { lane: 8, num: '313', name: "IT'S SHOW TIME", box: 'CROSSFIT BETIM' },
+                { lane: 9, num: '314', name: 'TEAM HERCULES MASTER', box: 'PIER CF' },
+                { lane: 10, num: '315', name: 'HERCULES-POWER COUPLE', box: 'HERCULES FUNCTIONAL' },
+                { lane: 11, num: '316', name: 'TEAM TESTE', box: 'CENTAURUS CROSSFIT' }
+            ]},
+            { day: 'sexta', time: '18:30', cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx', 'mista', 'masc'], workout: '#1', athletes: [
+                { lane: 2, num: '301', name: 'SCHAMNE COMP', box: 'BLOCK COMMUNITY FITNESS' },
+                { lane: 3, num: '302', name: 'TEAM HERCULES', box: 'CROSSFIT RIVEN' },
+                { lane: 4, num: '303', name: 'CROSSFIT PARK EXTREME', box: 'CROSSFIT PARK EXTREME' },
+                { lane: 5, num: '304', name: 'MONSTERS', box: 'CF MONSTER' },
+                { lane: 6, num: '305', name: 'HERA/CLA', box: 'HERA CF' },
+                { lane: 7, num: '306', name: 'SABIA E BEIJA-FLOR', box: 'HERCULES FUNCTIONAL' },
+                { lane: 9, num: '411', name: 'GABRIEL E PEDRO', box: 'UNBROKEN' },
+                { lane: 10, num: '412', name: 'WOHALI', box: 'WOHALI' },
+                { lane: 11, num: '413', name: 'TEAM CFCOSTA', box: 'CF COSTA' }
+            ]},
+            { day: 'sexta', time: '19:00', cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx', 'masc'], workout: '#1', athletes: [
+                { lane: 2, num: '401', name: 'TEAM STRONG MONKEY', box: 'HERCULES FUNCTIONAL' },
+                { lane: 3, num: '402', name: 'TEAM GARRA / ZERO 2', box: 'GARRA CROSS' },
+                { lane: 4, num: '403', name: 'SE QUEBRAR JA SABE', box: 'HERCULES FUNCTIONAL' },
+                { lane: 5, num: '404', name: 'TIMAO E PUMBA', box: 'INDEPENDENTE' },
+                { lane: 6, num: '405', name: 'MARDUK', box: 'CROSSFIT MARDUK' },
+                { lane: 7, num: '406', name: 'VALE TEAM', box: 'CROSSFIT TAUBATE' },
+                { lane: 8, num: '407', name: 'ROLO COMPRESSOR', box: 'CF CURVELO' },
+                { lane: 9, num: '408', name: 'DEDE E RAYAN', box: 'MACHADO CROSSFIT' },
+                { lane: 10, num: '409', name: 'ELITE TRAINING CENTER', box: 'ELITE TRAINING CENTER' },
+                { lane: 11, num: '410', name: 'MASTER PAIN', box: 'HERCULES FUNCIONAL' }
+            ]},
+            { day: 'sexta', time: '19:30', cat: 'Elite Feminino (Single Heat)', tags: ['elite', 'fem'], workout: '#1', athletes: [
+                { lane: 1, num: '201', name: 'ISADORA MORENO', box: 'CROSS FORCE' },
+                { lane: 2, num: '202', name: 'THAYS FRANCA', box: 'CROSSFIT CASINHA VERDE' },
+                { lane: 3, num: '203', name: 'LUIZA DIAS', box: 'CROSSFIT PAMPULHA' },
+                { lane: 4, num: '204', name: 'JOANNA BOAVENTURA', box: 'MONSTER FACTORY' },
+                { lane: 5, num: '205', name: 'EMILY ANDRADE', box: 'BRAVE FITNESS FACTORY' },
+                { lane: 6, num: '206', name: 'ANDREIA PINHEIRO', box: 'CF ENDURANCE' },
+                { lane: 7, num: '207', name: 'FABIANE CARVALHO', box: 'CROSSFIT PRAVATTI' },
+                { lane: 8, num: '208', name: 'MARINA ZAGO', box: 'CROSSFIT CONTAGEM' },
+                { lane: 9, num: '209', name: 'GABRIELA NANCI', box: 'VITTORIA CROSSFIT' },
+                { lane: 10, num: '213', name: 'LETICIA VICTOR', box: 'VITTORIA MOREREPS' },
+                { lane: 11, num: '211', name: 'GABRIELLA LUQUE', box: 'BOX 18' },
+                { lane: 12, num: '212', name: 'GABRIELA MACEDO CHAVES', box: 'VITTORIA CROSSFIT' }
+            ]},
+            { day: 'sexta', time: '20:00', cat: 'Elite Masculino (Single Heat)', tags: ['elite', 'masc'], workout: '#1', athletes: [
+                { lane: 1, num: '101', name: 'VITOR LOFFI WAWRZENIAK', box: 'INDEPENTE' },
+                { lane: 2, num: '102', name: 'RICARDO MARQUEZ', box: 'CROSSFIT BE HAPPY' },
+                { lane: 3, num: '103', name: 'MATEUS ROMAO', box: 'CROSSFIT MONSTROS' },
+                { lane: 4, num: '104', name: 'DAN MOREIRA', box: 'SPARTA 1507' },
+                { lane: 5, num: '105', name: 'JUNINHO DE PAULA', box: 'BRAVE FITNESS FACTORY' },
+                { lane: 6, num: '106', name: 'HENRIQUE MOREIRA', box: 'INDEPENDENTE' },
+                { lane: 7, num: '107', name: 'PEDRO MARTINS', box: 'CROSSFIT HIGIENOPOLIS' },
+                { lane: 8, num: '108', name: 'BERNARDO TORQUATO COSTA', box: 'MUTARE PERFORMANCE' },
+                { lane: 9, num: '109', name: 'MATHEUS GOMES', box: 'VITTORIA CROSSFIT' },
+                { lane: 10, num: '110', name: 'LUCAS DECIO', box: 'CROSS PRIMEFIT' },
+                { lane: 11, num: '111', name: 'TIAGO OLIVEIRA', box: 'CF ENDURANCE' },
+                { lane: 12, num: '112', name: 'BENJAMIN GUTIERREZ', box: 'XOMMA FITNESS' }
+            ]},
+            // SABADO MANHÃ
+            { day: 'sabado', time: '08:00', cat: 'Quarteto Scaled Misto (Single Heat)', tags: ['scaled'], workout: '#1', athletes: [
+                { lane: 1, num: '601', name: 'PESO, PENA, FORCA E FOLGA', box: 'HERA CF' },
+                { lane: 2, num: '602', name: '1 BRUTA 3 MANE', box: 'MST CROSSBOX' },
+                { lane: 3, num: '603', name: 'FJKL', box: 'CROSSFIT PARK EXTREME' },
+                { lane: 4, num: '604', name: "CROSSLOVER'S", box: 'ELITE TRAINING CENTER' },
+                { lane: 5, num: '605', name: 'TEAM SAVANAH', box: 'CF TEAM SAVANAH' },
+                { lane: 6, num: '606', name: 'ARARAS E MACHADOS', box: 'MACAW CF' },
+                { lane: 7, num: '607', name: 'FUZION', box: 'TRIUNFO' },
+                { lane: 8, num: '608', name: 'UAIA', box: 'CROSSFIT WAYA' },
+                { lane: 9, num: '609', name: 'TRES CAVALOS E UM PONEI', box: 'ELITE TRAINING CENTER' },
+                { lane: 10, num: '610', name: 'JUST CROSS NOT FIT', box: 'NACAO CROSSFIT' },
+                { lane: 11, num: '611', name: 'DE ULTIMA HORA', box: 'CF TEAM SAVANAH' }
+            ]},
+            { day: 'sabado', time: '08:30', cat: 'Quarteto Intermediario Misto (Single Heat)', tags: ['inter'], workout: '#1', athletes: [
+                { lane: 3, num: '501', name: 'CROSSFIT PARK EXTREME', box: 'CROSSFIT PARK EXTREME' },
+                { lane: 4, num: '502', name: 'TEAM MACHADO', box: 'MACHADO CROSSFIT' },
+                { lane: 5, num: '503', name: 'TEAM CF1000', box: 'CF1000' },
+                { lane: 6, num: '504', name: 'ROUND 4', box: 'GRIFO CROSSFIT' },
+                { lane: 7, num: '505', name: 'OS IMPARAVEIS', box: 'ELITE TRAINING CENTER' },
+                { lane: 8, num: '506', name: 'CFPX', box: 'CROSSFIT PARK EXTREME' },
+                { lane: 9, num: '507', name: 'UNBROKEN', box: 'UNBROKEN FUNCTIONAL' }
+            ]},
+            { day: 'sabado', time: '09:05', cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#2', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
+            { day: 'sabado', time: '09:23', cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#2', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
+            { day: 'sabado', time: '09:36', cat: 'Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#2', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
+            { day: 'sabado', time: '09:54', cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#2/3', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
+            { day: 'sabado', time: '10:09', cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#2/3', athletes: [{ lane: '-', num: '', name: 'Ranking (Sexta)', box: 'A Definir' }]},
+            { day: 'sabado', time: '10:29', cat: 'Quarteto Scaled Misto (Heat 1)', tags: ['scaled'], workout: '#2/3', athletes: [
+                { lane: 1, num: '601', name: 'PESO, PENA, FORCA...', box: 'HERA CF' },
+                { lane: 2, num: '602', name: '1 BRUTA 3 MANE', box: 'MST CROSSBOX' },
+                { lane: 3, num: '603', name: 'FJKL', box: 'CF PARK EXTREME' },
+                { lane: 4, num: '604', name: "CROSSLOVER'S", box: 'ELITE TRAINING' },
+                { lane: 5, num: '605', name: 'TEAM SAVANAH', box: 'CF TEAM SAVANAH' },
+                { lane: 6, num: '606', name: 'ARARAS E MACHADOS', box: 'MACAW CF' },
+                { lane: 7, num: '607', name: 'FUZION', box: 'TRIUNFO' },
+                { lane: 8, num: '608', name: 'UAIA', box: 'CROSSFIT WAYA' },
+                { lane: 9, num: '609', name: 'TRES CAVALOS/PONEI', box: 'ELITE TRAINING' },
+                { lane: 10, num: '610', name: 'JUST CROSS NOT FIT', box: 'NACAO CROSSFIT' },
+                { lane: 11, num: '611', name: 'DE ULTIMA HORA', box: 'CF TEAM SAVANAH' }
+            ]},
+            { day: 'sabado', time: '10:46', cat: 'Quarteto Intermediario Misto (Heat 2)', tags: ['inter'], workout: '#2/3', athletes: [
+                { lane: 3, num: '501', name: 'CROSSFIT PARK EXTREME', box: 'CF PARK EXTREME' },
+                { lane: 4, num: '502', name: 'TEAM MACHADO', box: 'MACHADO CF' },
+                { lane: 5, num: '503', name: 'TEAM CF1000', box: 'CF1000' },
+                { lane: 6, num: '504', name: 'ROUND 4', box: 'GRIFO CROSSFIT' },
+                { lane: 7, num: '505', name: 'OS IMPARAVEIS', box: 'ELITE TRAINING' },
+                { lane: 8, num: '506', name: 'CFPX', box: 'CF PARK EXTREME' },
+                { lane: 9, num: '507', name: 'UNBROKEN', box: 'UNBROKEN FUNCTIONAL' }
+            ]},
+            // FITNESS RACE
+            { day: 'sabado', time: '12:00', cat: 'Open (Heat 1)', tags: ['fr'], workout: 'FR', athletes: [
+                { lane: 1, num: '209', name: 'TEAM FUSAO', box: 'CROSSFIT BLUE STORM' },
+                { lane: 2, num: '210', name: 'VALERIA E GABRIEL', box: 'KAPELA GYM' },
+                { lane: 3, num: '211', name: 'TEAM SAVANAH', box: 'HOME BOX' },
+                { lane: 4, num: '212', name: 'BARBARA E SERGIO', box: 'CROSSFIT PARK EXTREME' }
+            ]},
+            { day: 'sabado', time: '12:10', cat: 'Open (Heat 2)', tags: ['fr'], workout: 'FR', athletes: [
+                { lane: 1, num: '205', name: 'DUPLA RESILIENTE', box: 'CF COSTA' },
+                { lane: 2, num: '206', name: 'TEAM KAPELA GYM', box: 'KAPELA GYM' },
+                { lane: 3, num: '207', name: 'ELITE TRAINING CENTER', box: 'ELITE TRAINING CENTER' },
+                { lane: 4, num: '208', name: 'KAMUSKAZE', box: 'KAMUS' }
+            ]},
+            { day: 'sabado', time: '12:20', cat: 'Open (Heat 3)', tags: ['fr'], workout: 'FR', athletes: [
+                { lane: 1, num: '201', name: 'LAIS/GUSTAVO', box: 'HERA' },
+                { lane: 2, num: '202', name: 'WAKANDA', box: 'AGBARA GYM' },
+                { lane: 3, num: '203', name: 'BRUCTUS', box: 'BRUCTUS' },
+                { lane: 4, num: '204', name: 'M&M: MILAGRE E MISERICORDIA', box: 'ELITE TRAINING CENTER' }
+            ]},
+            { day: 'sabado', time: '12:30', cat: 'Pro (Heat 1)', tags: ['fr'], workout: 'FR', athletes: [
+                { lane: 1, num: '107', name: 'KAMUS', box: 'CF KAMUS' },
+                { lane: 2, num: '108', name: 'CROSSFIT WAYA', box: 'CROSSFIT WAYA' },
+                { lane: 3, num: '109', name: 'TEAM ELITE', box: 'ELITE CROSS FITNESS' }
+            ]},
+            { day: 'sabado', time: '12:40', cat: 'Pro (Heat 2)', tags: ['fr'], workout: 'FR', athletes: [
+                { lane: 1, num: '104', name: 'MISTAPROFIT', box: 'CENTAURUS' },
+                { lane: 2, num: '105', name: 'UNBROKEN', box: 'UNBROKEN' },
+                { lane: 3, num: '106', name: 'PEDRO E RENATA', box: 'CROSSFIT BLUE STORM' }
+            ]},
+            { day: 'sabado', time: '12:50', cat: 'Pro (Heat 3)', tags: ['fr'], workout: 'FR', athletes: [
+                { lane: 1, num: '101', name: 'CHRISTIAN E FERNANDA', box: 'HERA CF/CROWN FORMOSA' },
+                { lane: 2, num: '102', name: 'ELITE TRAINING CENTER', box: 'ELITE TRAINING CENTER' },
+                { lane: 3, num: '103', name: 'IRON SUPPS', box: 'WOHALI' }
+            ]},
+            // TARDE SABADO (Clean Karma) 
+            { day: 'sabado', time: '13:50', cat: 'Quarteto Scaled Misto (Single Heat)', tags: ['scaled'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }]},
+            { day: 'sabado', time: '14:12', cat: 'Quarteto Intermediario Misto (Single Heat)', tags: ['inter'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }]},
+            { day: 'sabado', time: '14:29', cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }]},
+            { day: 'sabado', time: '14:46', cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }]},
+            { day: 'sabado', time: '15:13', cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }]},
+            { day: 'sabado', time: '15:30', cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }]},
+            { day: 'sabado', time: '15:47', cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#4', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }]},
+            // FINAL TARDE (Charter) 
+            { day: 'sabado', time: '16:14', cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#5', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }]},
+            { day: 'sabado', time: '16:29', cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#5', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }]},
+            { day: 'sabado', time: '16:44', cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx'], workout: '#5', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }]},
+            { day: 'sabado', time: '16:59', cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#5', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }]},
+            { day: 'sabado', time: '17:19', cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#5', athletes: [{ lane: '-', num: '', name: 'Top Atletas', box: '-' }]},
+            
+            // DOMINGO
+            { day: 'domingo', time: '-', cat: 'Aguardando', tags: [], workout: '', athletes: [] }
+        ];
+
+        let currentDay = 'sexta';
+        let currentCat = 'all';
+        let searchTerm = '';
+
+        function render() {
+            try {
+                const container = document.getElementById('timeline-container');
+                container.innerHTML = '';
+
+                if (currentDay === 'domingo') {
+                    container.innerHTML = `<div class="empty-msg">A programação de Domingo será liberada em breve.</div>`;
+                    return;
+                }
+                
+                let filtered = scheduleData.filter(item => {
+                    return item.day === currentDay && (currentCat === 'all' || item.tags.includes(currentCat));
+                });
+
+                if (searchTerm) {
+                    filtered = filtered.filter(item => {
+                        return item.athletes.some(ath => {
+                            return ath.name.toLowerCase().includes(searchTerm) || (ath.num && ath.num.toString().includes(searchTerm));
+                        });
+                    });
+                }
+
+                if (filtered.length === 0) {
+                    let msg = `Nenhuma bateria encontrada`;
+                    if (searchTerm) msg += ` para "${searchTerm}"`;
+                    container.innerHTML = `<div class="empty-msg">${msg}.</div>`;
+                    return;
+                }
+
+                filtered.forEach((item, index) => {
+                    const isFR = item.tags.includes('fr');
+                    const card = document.createElement('div');
+                    card.className = `heat-card ${isFR ? 'fr' : ''}`;
+                    if(searchTerm.length > 0) card.classList.add('open');
+                    
+                    let athletesHTML = '';
+                    item.athletes.forEach(ath => {
+                        const numDisplay = ath.num ? `<span class="ath-num">#${ath.num}</span>` : '';
+                        athletesHTML += `
+                            <div class="athlete-row">
+                                <div class="lane-box">${ath.lane}</div>
+                                <div class="ath-info">
+                                    <div class="ath-header">
+                                        ${numDisplay}
+                                        <div class="ath-name">${ath.name}</div>
+                                    </div>
+                                    <span class="ath-box">${ath.box}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    card.innerHTML = `
+                        <div class="heat-header" onclick="this.parentElement.classList.toggle('open')">
+                            <div class="time-box">
+                                <span class="time-val">${item.time}</span>
+                                <span class="time-label">Horário</span>
+                            </div>
+                            <div class="heat-info">
+                                <h3>${item.cat}</h3>
+                                <div class="heat-meta">
+                                    <span>${item.athletes.length} raias</span>
+                                    <span class="workout-tag">${item.workout}</span>
+                                </div>
+                            </div>
+                            <svg class="chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                        </div>
+                        <div class="heat-details">
+                            ${athletesHTML}
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (e) {
+                console.error(e);
+                document.getElementById('timeline-container').innerHTML = '<div style="padding:20px; color:red; text-align:center;">Erro ao carregar dados.</div>';
+            }
+        }
+
+        function updateSearch(val) {
+            searchTerm = val.toLowerCase().trim();
+            render();
+        }
+
+        function setDay(day) {
+            currentDay = day;
+            document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`btn-${day}`).classList.add('active');
+            render();
+        }
+
+        function filterCategory(cat, btn) {
+            currentCat = cat;
+            document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (cat === 'fr') {
+                setDay('sabado'); 
+            } else {
+                render();
+            }
+        }
+
+        // Inicializa
+        window.onload = render;
+    </script>
+</body>
+</html>
