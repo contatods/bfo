@@ -47,7 +47,7 @@
         }
         .live-dot { width: 6px; height: 6px; background-color: #FF3D00; border-radius: 50%; }
 
-        /* Actions Scrollable for 5 items */
+        /* Actions Scrollable */
         .quick-actions-wrapper {
             background: var(--bg-card); border-bottom: 1px solid var(--border);
             overflow-x: auto; scrollbar-width: none; /* Hide scrollbar */
@@ -56,13 +56,13 @@
             display: flex; gap: 10px; padding: 15px; min-width: max-content;
         }
         .action-btn {
-            background: #1f1f1f; border: 1px solid var(--border); border-radius: 8px; padding: 10px 8px;
+            background: #1f1f1f; border: 1px solid var(--border); border-radius: 8px; padding: 12px 12px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-decoration: none; transition: 0.2s; min-width: 75px; flex: 1;
+            text-decoration: none; transition: 0.2s; min-width: 90px;
         }
         .action-btn:active { transform: scale(0.96); border-color: var(--primary); }
         .action-icon { 
-            width: 24px; height: 24px; margin-bottom: 5px; 
+            width: 24px; height: 24px; margin-bottom: 6px; 
             fill: none; stroke: var(--primary); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
         }
         .action-text { font-size: 0.65rem; color: var(--text-sec); font-weight: 500; text-align: center; white-space: nowrap; }
@@ -212,19 +212,19 @@
             </a>
             <a href="https://leaderboard.digitalscore.com.br/full/348" target="_blank" class="action-btn">
                 <svg class="action-icon" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-                <span class="action-text">Ranking CF</span>
+                <span class="action-text">Leaderboard CrossFit</span>
             </a>
             <a href="https://leaderboard.digitalscore.com.br/full/350" target="_blank" class="action-btn">
                 <svg class="action-icon" viewBox="0 0 24 24" style="stroke: #E91E63;"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                <span class="action-text">Ranking FR</span>
+                <span class="action-text">Leaderboard Fitness Race</span>
             </a>
             <a href="https://forms.gle/Y75pBxZMQo7FNGVg7" target="_blank" class="action-btn">
                 <svg class="action-icon" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
-                <span class="action-text">Revisão</span>
+                <span class="action-text">Revisão de Resultado</span>
             </a>
             <a href="https://panel.digitalscore.com.br/" target="_blank" class="action-btn">
                 <svg class="action-icon" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
-                <span class="action-text">Painel</span>
+                <span class="action-text">Painel do Atleta</span>
             </a>
         </div>
     </div>
@@ -311,7 +311,7 @@
                 { lane: 9, num: '209', name: 'GABRIELA NANCI', box: 'VITTORIA CROSSFIT' },
                 { lane: 10, num: '213', name: 'LETICIA VICTOR', box: 'VITTORIA MOREREPS' },
                 { lane: 11, num: '211', name: 'GABRIELLA LUQUE', box: 'BOX 18' },
-                { lane: 12, num: '212', name: 'GABRIELA MACEDO CHAVES', box: 'VITTORIA CROSSFIT' }
+                { lane: 12, num: '212', name: 'GABRIELA MACEDO CHAVES', box: 'VITTORIA CROSSFIT | MOREREPS' }
             ]},
             { day: 'sexta', time: '20:00', warmup: '19:20', queue: '19:45', cap: "20'", cat: 'Elite Masculino (Single Heat)', tags: ['elite', 'masc'], workout: '#1', wodName: 'Load Management', athletes: [
                 { lane: 1, num: '101', name: 'VITOR LOFFI WAWRZENIAK', box: 'INDEPENTE' },
