@@ -56,16 +56,21 @@
             display: flex; gap: 10px; padding: 15px; min-width: max-content;
         }
         .action-btn {
-            background: #1f1f1f; border: 1px solid var(--border); border-radius: 8px; padding: 12px 12px;
+            background: #1f1f1f; border: 1px solid var(--border); border-radius: 8px; padding: 10px 8px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-decoration: none; transition: 0.2s; min-width: 90px;
+            text-decoration: none; transition: 0.2s; min-width: 85px; /* Largura reduzida para compactar */
         }
         .action-btn:active { transform: scale(0.96); border-color: var(--primary); }
         .action-icon { 
             width: 24px; height: 24px; margin-bottom: 6px; 
             fill: none; stroke: var(--primary); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
         }
-        .action-text { font-size: 0.65rem; color: var(--text-sec); font-weight: 500; text-align: center; white-space: nowrap; }
+        .action-text { 
+            font-size: 0.65rem; color: var(--text-sec); font-weight: 500; 
+            text-align: center; 
+            white-space: normal; /* Permite quebra de linha */
+            line-height: 1.2;    /* Altura da linha ajustada */
+        }
 
         /* Filters */
         .controls-wrapper {
@@ -190,7 +195,6 @@
         .empty-msg { text-align: center; color: #666; padding: 40px; font-style: italic; }
         
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
-        
         #error-msg { display:none; padding:20px; color:red; text-align:center; }
         #force-load { display:none; margin: 20px auto; padding: 10px 20px; background: #333; color: #fff; border: 1px solid #555; border-radius: 5px; cursor: pointer; }
     </style>
@@ -213,19 +217,19 @@
             </a>
             <a href="https://leaderboard.digitalscore.com.br/full/348" target="_blank" class="action-btn">
                 <svg class="action-icon" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" style="fill:none;stroke:var(--primary);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;" /></svg>
-                <span class="action-text">Leaderboard CrossFit</span>
+                <span class="action-text">Leaderboard<br>CrossFit</span>
             </a>
             <a href="https://leaderboard.digitalscore.com.br/full/350" target="_blank" class="action-btn">
                 <svg class="action-icon" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" style="fill:none;stroke:#E91E63;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;" /></svg>
-                <span class="action-text">Leaderboard Fitness Race</span>
+                <span class="action-text">Leaderboard<br>Fitness Race</span>
             </a>
             <a href="https://forms.gle/Y75pBxZMQo7FNGVg7" target="_blank" class="action-btn">
                 <svg class="action-icon" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" style="fill:none;stroke:var(--primary);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;" /></svg>
-                <span class="action-text">Revisão de Resultado</span>
+                <span class="action-text">Revisão de<br>Resultado</span>
             </a>
             <a href="https://panel.digitalscore.com.br/" target="_blank" class="action-btn">
-                <svg class="action-icon" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" style="fill:none;stroke:var(--primary);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;" /></svg>
-                <span class="action-text">Painel do Atleta</span>
+                <svg class="action-icon" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" style="fill:none;stroke:var(--primary);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;" /></svg>
+                <span class="action-text">Painel do<br>Atleta</span>
             </a>
         </div>
     </div>
@@ -234,7 +238,7 @@
         <div class="search-container">
             <div class="search-input-wrapper">
                 <svg class="search-icon-inside" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                <input type="text" class="search-input" placeholder="Buscar atleta ou número..." oninput="updateSearch(this.value)">
+                <input type="text" class="search-input" placeholder="Buscar atleta, time ou box..." oninput="updateSearch(this.value)">
             </div>
         </div>
 
@@ -270,7 +274,7 @@
                 { lane: 3, num: '308', name: 'TEAM NACAO', box: 'NACAO CROSSFIT' },
                 { lane: 4, num: '309', name: 'TEAM KAPELA', box: 'KAPELA GYM' },
                 { lane: 5, num: '310', name: 'KAPELA GYM/HERCULES', box: 'KAPELA GYM' },
-                { lane: 6, num: '311', name: 'ADRIANO E BIANCA', box: 'MACAW CF & CROSSFIT UNAI' },
+                { lane: 6, num: '311', name: 'ADRIANO E BIANCA', box: 'MACAW CF' },
                 { lane: 7, num: '312', name: 'TEAM KAMUS', box: 'CF KAMUS' },
                 { lane: 8, num: '313', name: "IT'S SHOW TIME", box: 'CROSSFIT BETIM' },
                 { lane: 9, num: '314', name: 'TEAM HERCULES MASTER', box: 'PIER CF' },
@@ -290,7 +294,7 @@
             ]},
             { day: 'sexta', time: '19:00', warmup: '18:20', queue: '18:45', cap: "20'", cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx', 'masc'], workout: '#1', wodName: 'Load Management', athletes: [
                 { lane: 2, num: '401', name: 'TEAM STRONG MONKEY', box: 'HERCULES FUNCTIONAL' },
-                { lane: 3, num: '402', name: 'TEAM GARRA / ZERO 2', box: 'GARRA CROSS / HERCULES FUNCTIONAL' },
+                { lane: 3, num: '402', name: 'TEAM GARRA / ZERO 2', box: 'GARRA CROSS' },
                 { lane: 4, num: '403', name: 'SE QUEBRAR JA SABE', box: 'HERCULES FUNCTIONAL' },
                 { lane: 5, num: '404', name: 'TIMAO E PUMBA', box: 'INDEPENDENTE' },
                 { lane: 6, num: '405', name: 'MARDUK', box: 'CROSSFIT MARDUK' },
@@ -303,16 +307,16 @@
             { day: 'sexta', time: '19:30', warmup: '18:50', queue: '19:15', cap: "20'", cat: 'Elite Feminino (Single Heat)', tags: ['elite', 'fem'], workout: '#1', wodName: 'Load Management', athletes: [
                 { lane: 1, num: '201', name: 'ISADORA MORENO', box: 'CROSS FORCE' },
                 { lane: 2, num: '202', name: 'THAYS FRANCA', box: 'CROSSFIT CASINHA VERDE' },
-                { lane: 3, num: '203', name: 'LUIZA DIAS', box: 'CROSSFIT PAMPULHA / BRAVE FITNESS' },
+                { lane: 3, num: '203', name: 'LUIZA DIAS', box: 'CROSSFIT PAMPULHA' },
                 { lane: 4, num: '204', name: 'JOANNA BOAVENTURA', box: 'MONSTER FACTORY' },
                 { lane: 5, num: '205', name: 'EMILY ANDRADE', box: 'BRAVE FITNESS FACTORY' },
-                { lane: 6, num: '206', name: 'ANDREIA PINHEIRO', box: 'CF ENDURANCE -/ BSBSTRONG' },
+                { lane: 6, num: '206', name: 'ANDREIA PINHEIRO', box: 'CF ENDURANCE' },
                 { lane: 7, num: '207', name: 'FABIANE CARVALHO', box: 'CROSSFIT PRAVATTI' },
                 { lane: 8, num: '208', name: 'MARINA ZAGO', box: 'CROSSFIT CONTAGEM' },
                 { lane: 9, num: '209', name: 'GABRIELA NANCI', box: 'VITTORIA CROSSFIT' },
                 { lane: 10, num: '213', name: 'LETICIA VICTOR', box: 'VITTORIA MOREREPS' },
                 { lane: 11, num: '211', name: 'GABRIELLA LUQUE', box: 'BOX 18' },
-                { lane: 12, num: '212', name: 'GABRIELA MACEDO CHAVES', box: 'VITTORIA CROSSFIT | MOREREPS' }
+                { lane: 12, num: '212', name: 'GABRIELA MACEDO CHAVES', box: 'VITTORIA CROSSFIT' }
             ]},
             { day: 'sexta', time: '20:00', warmup: '19:20', queue: '19:45', cap: "20'", cat: 'Elite Masculino (Single Heat)', tags: ['elite', 'masc'], workout: '#1', wodName: 'Load Management', athletes: [
                 { lane: 1, num: '101', name: 'VITOR LOFFI WAWRZENIAK', box: 'INDEPENTE' },
@@ -402,8 +406,8 @@
                 { lane: 12, num: '209', name: 'GABRIELA NANCI', box: 'VITTORIA CROSSFIT' }
             ]},
             { day: 'sabado', time: '10:09', warmup: '09:29', queue: '09:54', cap: "10'", cat: 'Elite Masculino (Single Heat)', tags: ['elite', 'masc'], workout: '#2/3', wodName: 'WOD 2 & 3', athletes: [
-                { lane: 1, num: '102', name: 'RICARDO MARQUEZ', box: 'CROSSFIT BE HAPPY' },
-                { lane: 2, num: '110', name: 'LUCAS DECIO', box: 'CROSS PRIMEFIT' },
+                { lane: 1, num: '103', name: 'MATEUS ROMAO', box: 'CROSSFIT MONSTROS' },
+                { lane: 2, num: '111', name: 'TIAGO OLIVEIRA', box: 'CF ENDURANCE' },
                 { lane: 3, num: '108', name: 'BERNARDO TORQUATO COSTA', box: 'MUTARE PERFORMANCE' },
                 { lane: 4, num: '107', name: 'PEDRO MARTINS', box: 'CROSSFIT HIGIENOPOLIS' },
                 { lane: 5, num: '105', name: 'JUNINHO DE PAULA', box: 'BRAVE FITNESS FACTORY' },
@@ -412,8 +416,7 @@
                 { lane: 8, num: '104', name: 'DAN MOREIRA', box: 'SPARTA 1507' },
                 { lane: 9, num: '109', name: 'MATHEUS GOMES', box: 'VITTORIA CROSSFIT' },
                 { lane: 10, num: '101', name: 'VITOR LOFFI WAWRZENIAK', box: 'INDEPENTE' },
-                { lane: 11, num: '111', name: 'TIAGO OLIVEIRA', box: 'CF ENDURANCE' },
-                { lane: 12, num: '103', name: 'MATEUS ROMAO', box: 'CROSSFIT MONSTROS' }
+                { lane: 11, num: '102', name: 'RICARDO MARQUEZ', box: 'CROSSFIT BE HAPPY' }
             ]},
             { 
                 day: 'sabado', time: '10:29', warmup: '09:49', queue: '10:14', cap: "12'",
@@ -550,8 +553,8 @@
                 { lane: 12, num: '209', name: 'GABRIELA NANCI', box: 'VITTORIA CROSSFIT' }
             ]},
             { day: 'sabado', time: '15:47', warmup: '15:30', queue: '15:55', cap: "12'", cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#4', wodName: 'Clean Karma', athletes: [
-                { lane: 1, num: '102', name: 'RICARDO MARQUEZ', box: 'CROSSFIT BE HAPPY' },
-                { lane: 2, num: '110', name: 'LUCAS DECIO', box: 'CROSS PRIMEFIT' },
+                { lane: 1, num: '103', name: 'MATEUS ROMAO', box: 'CROSSFIT MONSTROS' },
+                { lane: 2, num: '111', name: 'TIAGO OLIVEIRA', box: 'CF ENDURANCE' },
                 { lane: 3, num: '108', name: 'BERNARDO TORQUATO COSTA', box: 'MUTARE PERFORMANCE' },
                 { lane: 4, num: '107', name: 'PEDRO MARTINS', box: 'CROSSFIT HIGIENOPOLIS' },
                 { lane: 5, num: '105', name: 'JUNINHO DE PAULA', box: 'BRAVE FITNESS FACTORY' },
@@ -560,11 +563,10 @@
                 { lane: 8, num: '104', name: 'DAN MOREIRA', box: 'SPARTA 1507' },
                 { lane: 9, num: '109', name: 'MATHEUS GOMES', box: 'VITTORIA CROSSFIT' },
                 { lane: 10, num: '101', name: 'VITOR LOFFI WAWRZENIAK', box: 'INDEPENTE' },
-                { lane: 11, num: '111', name: 'TIAGO OLIVEIRA', box: 'CF ENDURANCE' },
-                { lane: 12, num: '103', name: 'MATEUS ROMAO', box: 'CROSSFIT MONSTROS' }
+                { lane: 11, num: '102', name: 'RICARDO MARQUEZ', box: 'CROSSFIT BE HAPPY' }
             ]},
             // FINAL TARDE (Charter)
-            { day: 'sabado', time: '16:54', warmup: '16:14', queue: '16:39', cap: "10'", cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#5', wodName: 'Charter', athletes: [
+            { day: 'sabado', time: '16:14', warmup: '15:47', queue: '16:12', cap: "10'", cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#5', wodName: 'Charter', athletes: [
                 { lane: 3, num: '310', name: 'KAPELA GYM/HERCULES', box: 'KAPELA GYM' },
                 { lane: 4, num: '302', name: 'TEAM HERCULES', box: 'CROSSFIT RIVEN' },
                 { lane: 5, num: '306', name: 'SABIA E BEIJA-FLOR', box: 'HERCULES FUNCTIONAL' },
@@ -574,7 +576,7 @@
                 { lane: 9, num: '305', name: 'HERA/CLA', box: 'HERA CF' },
                 { lane: 10, num: '301', name: 'SCHAMNE COMP', box: 'BLOCK COMMUNITY FITNESS' }
             ]},
-            { day: 'sabado', time: '17:09', warmup: '16:29', queue: '16:54', cap: "10'", cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#5', wodName: 'Charter', athletes: [
+            { day: 'sabado', time: '16:29', warmup: '16:14', queue: '16:39', cap: "10'", cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#5', wodName: 'Charter', athletes: [
                 { lane: 2, num: '313', name: "IT'S SHOW TIME", box: 'CROSSFIT BETIM' },
                 { lane: 3, num: '314', name: 'TEAM HERCULES MASTER', box: 'PIER CF' },
                 { lane: 4, num: '303', name: 'CROSSFIT PARK EXTREME.', box: 'CROSSFIT PARK EXTREME' },
@@ -585,7 +587,7 @@
                 { lane: 10, num: '410', name: 'MASTER PAIN', box: 'HERCULES FUNCIONAL' },
                 { lane: 11, num: '409', name: 'ELITE TRAINING CENTER', box: 'ELITE TRAINING CENTER' }
             ]},
-            { day: 'sabado', time: '17:24', warmup: '16:44', queue: '17:09', cap: "10'", cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx'], workout: '#5', wodName: 'Charter', athletes: [
+            { day: 'sabado', time: '16:44', warmup: '16:29', queue: '16:54', cap: "10'", cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx'], workout: '#5', wodName: 'Charter', athletes: [
                 { lane: 2, num: '408', name: 'DEDE E RAYAN', box: 'MACHADO CROSSFIT' },
                 { lane: 3, num: '412', name: 'WOHALI', box: 'WOHALI' },
                 { lane: 4, num: '407', name: 'ROLO COMPRESSOR', box: 'CF CURVELO' },
@@ -597,7 +599,7 @@
                 { lane: 10, num: '413', name: 'TEAM CECOSTA', box: 'CF COSTA' },
                 { lane: 11, num: '405', name: 'MARDUK', box: 'CROSSFIT MARDUK' }
             ]},
-            { day: 'sabado', time: '17:39', warmup: '16:59', queue: '17:24', cap: "10'", cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#5', wodName: 'Charter', athletes: [
+            { day: 'sabado', time: '16:59', warmup: '16:44', queue: '17:09', cap: "10'", cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#5', wodName: 'Charter', athletes: [
                 { lane: 1, num: '202', name: 'THAYS FRANCA', box: 'CROSSFIT CASINHA VERDE' },
                 { lane: 2, num: '213', name: 'LETICIA VICTOR', box: 'VITTORIA MOREREPS' },
                 { lane: 3, num: '207', name: 'KAPELA GYM/HERCULESFUNCTIONAL', box: 'CROSSFIT PRAVATTI' },
@@ -611,7 +613,7 @@
                 { lane: 11, num: '201', name: 'ISADORA MORENO', box: 'CROSS FORCE' },
                 { lane: 12, num: '209', name: 'GABRIELA NANCI', box: 'VITTORIA CROSSFIT' }
             ]},
-            { day: 'sabado', time: '17:59', warmup: '17:19', queue: '17:44', cap: "10'", cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#5', wodName: 'Charter', athletes: [
+            { day: 'sabado', time: '17:19', warmup: '16:59', queue: '17:24', cap: "10'", cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#5', wodName: 'Charter', athletes: [
                 { lane: 1, num: '102', name: 'RICARDO MARQUEZ', box: 'CROSSFIT BE HAPPY' },
                 { lane: 2, num: '110', name: 'LUCAS DECIO', box: 'CROSS PRIMEFIT' },
                 { lane: 3, num: '108', name: 'BERNARDO TORQUATO COSTA', box: 'MUTARE PERFORMANCE' },
