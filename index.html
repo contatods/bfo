@@ -47,30 +47,25 @@
         }
         .live-dot { width: 6px; height: 6px; background-color: #FF3D00; border-radius: 50%; }
 
-        /* --- QUICK ACTIONS (NEW OUTLINE STYLE) --- */
-        .quick-actions {
-            display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; padding: 15px;
+        /* Actions Scrollable for 5 items */
+        .quick-actions-wrapper {
             background: var(--bg-card); border-bottom: 1px solid var(--border);
+            overflow-x: auto; scrollbar-width: none; /* Hide scrollbar */
+        }
+        .quick-actions {
+            display: flex; gap: 10px; padding: 15px; min-width: max-content;
         }
         .action-btn {
-            background: #1a1a1a; 
-            border: 1px solid #333; 
-            border-radius: 10px; 
-            padding: 12px 5px;
+            background: #1f1f1f; border: 1px solid var(--border); border-radius: 8px; padding: 10px 8px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-decoration: none; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-decoration: none; transition: 0.2s; min-width: 75px; flex: 1;
         }
-        .action-btn:active { transform: scale(0.95); background: #222; border-color: var(--primary); }
-        
-        /* Ícones Outline */
+        .action-btn:active { transform: scale(0.96); border-color: var(--primary); }
         .action-icon { 
-            width: 26px; height: 26px; margin-bottom: 8px; 
-            fill: none; /* Sem preenchimento */
-            stroke: var(--primary); /* Cor da linha */
-            stroke-width: 1.8; /* Espessura da linha */
-            stroke-linecap: round; stroke-linejoin: round;
+            width: 24px; height: 24px; margin-bottom: 5px; 
+            fill: none; stroke: var(--primary); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
         }
-        .action-text { font-size: 0.65rem; color: #ccc; font-weight: 500; text-align: center; white-space: nowrap; letter-spacing: 0.3px; }
+        .action-text { font-size: 0.65rem; color: var(--text-sec); font-weight: 500; text-align: center; white-space: nowrap; }
 
         /* Filters */
         .controls-wrapper {
@@ -118,6 +113,16 @@
             content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--primary);
         }
         .heat-card.fr::before { background: #E91E63; }
+
+        /* Completed State Styles */
+        .heat-card.completed {
+            opacity: 0.6; filter: grayscale(0.8); border-left-color: #555 !important;
+        }
+        .heat-card.completed::before { background: #555; }
+        .finished-badge {
+            background: #333; color: #aaa; font-size: 0.6rem; padding: 2px 6px; 
+            border-radius: 4px; font-weight: bold; display: inline-block; margin-bottom: 4px;
+        }
 
         .heat-header {
             padding: 12px 15px; display: grid; grid-template-columns: 50px 1fr 20px;
@@ -185,7 +190,6 @@
         .empty-msg { text-align: center; color: #666; padding: 40px; font-style: italic; }
         
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
-        
         #error-msg { display:none; padding:20px; color:red; text-align:center; }
         #force-load { display:none; margin: 20px auto; padding: 10px 20px; background: #333; color: #fff; border: 1px solid #555; border-radius: 5px; cursor: pointer; }
     </style>
@@ -200,31 +204,29 @@
         <div class="live-badge"><div class="live-dot"></div> AO VIVO</div>
     </header>
 
-    <div class="quick-actions">
-        <a href="https://drive.google.com/open?id=1Rq-re9yqfAi9zLHXgLZM4dF_BMdj6IT7&usp=drive_fs" target="_blank" class="action-btn">
-            <svg class="action-icon" viewBox="0 0 24 24">
-                <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-            <span class="action-text">Workouts</span>
-        </a>
-        <a href="https://leaderboard.digitalscore.com.br/full/348" target="_blank" class="action-btn">
-            <svg class="action-icon" viewBox="0 0 24 24">
-                <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-            <span class="action-text">Leaderboard</span>
-        </a>
-        <a href="https://forms.gle/Y75pBxZMQo7FNGVg7" target="_blank" class="action-btn">
-            <svg class="action-icon" viewBox="0 0 24 24">
-                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-            </svg>
-            <span class="action-text">Revisão</span>
-        </a>
-        <a href="https://panel.digitalscore.com.br/" target="_blank" class="action-btn">
-            <svg class="action-icon" viewBox="0 0 24 24">
-                <path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-            </svg>
-            <span class="action-text">Painel</span>
-        </a>
+    <div class="quick-actions-wrapper">
+        <div class="quick-actions">
+            <a href="https://drive.google.com/open?id=1Rq-re9yqfAi9zLHXgLZM4dF_BMdj6IT7&usp=drive_fs" target="_blank" class="action-btn">
+                <svg class="action-icon" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                <span class="action-text">Workouts</span>
+            </a>
+            <a href="https://leaderboard.digitalscore.com.br/full/348" target="_blank" class="action-btn">
+                <svg class="action-icon" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                <span class="action-text">Ranking CF</span>
+            </a>
+            <a href="https://leaderboard.digitalscore.com.br/full/350" target="_blank" class="action-btn">
+                <svg class="action-icon" viewBox="0 0 24 24" style="stroke: #E91E63;"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                <span class="action-text">Ranking FR</span>
+            </a>
+            <a href="https://forms.gle/Y75pBxZMQo7FNGVg7" target="_blank" class="action-btn">
+                <svg class="action-icon" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
+                <span class="action-text">Revisão</span>
+            </a>
+            <a href="https://panel.digitalscore.com.br/" target="_blank" class="action-btn">
+                <svg class="action-icon" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                <span class="action-text">Painel</span>
+            </a>
+        </div>
     </div>
 
     <div class="controls-wrapper">
@@ -236,8 +238,8 @@
         </div>
 
         <div class="date-tabs">
-            <button id="btn-sexta" class="date-btn active" onclick="setDay('sexta')">Sexta (12)</button>
-            <button id="btn-sabado" class="date-btn" onclick="setDay('sabado')">Sábado (13)</button>
+            <button id="btn-sexta" class="date-btn" onclick="setDay('sexta')">Sexta (12)</button>
+            <button id="btn-sabado" class="date-btn active" onclick="setDay('sabado')">Sábado (13)</button>
             <button id="btn-domingo" class="date-btn" onclick="setDay('domingo')">Domingo (14)</button>
         </div>
 
@@ -260,14 +262,14 @@
     <footer>BFO 2025 • Powered by Digital Score</footer>
 
     <script>
-        /* ================== DADOS SEXTA-FEIRA ================== */
+        /* ================== DADOS SEXTA-FEIRA (CONCLUÍDO) ================== */
         const fridayData = [
             { day: 'sexta', time: '18:00', warmup: '17:20', queue: '17:45', cap: "20'", cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx', 'mista'], workout: '#1', wodName: 'Load Management', athletes: [
                 { lane: 2, num: '307', name: 'TEAM PUNK', box: 'PUNK CROSSFIT' },
                 { lane: 3, num: '308', name: 'TEAM NACAO', box: 'NACAO CROSSFIT' },
                 { lane: 4, num: '309', name: 'TEAM KAPELA', box: 'KAPELA GYM' },
                 { lane: 5, num: '310', name: 'KAPELA GYM/HERCULES', box: 'KAPELA GYM' },
-                { lane: 6, num: '311', name: 'ADRIANO E BIANCA', box: 'MACAW CF & CROSSFIT UNAI' },
+                { lane: 6, num: '311', name: 'ADRIANO E BIANCA', box: 'MACAW CF' },
                 { lane: 7, num: '312', name: 'TEAM KAMUS', box: 'CF KAMUS' },
                 { lane: 8, num: '313', name: "IT'S SHOW TIME", box: 'CROSSFIT BETIM' },
                 { lane: 9, num: '314', name: 'TEAM HERCULES MASTER', box: 'PIER CF' },
@@ -287,7 +289,7 @@
             ]},
             { day: 'sexta', time: '19:00', warmup: '18:20', queue: '18:45', cap: "20'", cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx', 'masc'], workout: '#1', wodName: 'Load Management', athletes: [
                 { lane: 2, num: '401', name: 'TEAM STRONG MONKEY', box: 'HERCULES FUNCTIONAL' },
-                { lane: 3, num: '402', name: 'TEAM GARRA / ZERO 2', box: 'GARRA CROSS / HERCULES FUNCTIONAL' },
+                { lane: 3, num: '402', name: 'TEAM GARRA / ZERO 2', box: 'GARRA CROSS' },
                 { lane: 4, num: '403', name: 'SE QUEBRAR JA SABE', box: 'HERCULES FUNCTIONAL' },
                 { lane: 5, num: '404', name: 'TIMAO E PUMBA', box: 'INDEPENDENTE' },
                 { lane: 6, num: '405', name: 'MARDUK', box: 'CROSSFIT MARDUK' },
@@ -300,16 +302,16 @@
             { day: 'sexta', time: '19:30', warmup: '18:50', queue: '19:15', cap: "20'", cat: 'Elite Feminino (Single Heat)', tags: ['elite', 'fem'], workout: '#1', wodName: 'Load Management', athletes: [
                 { lane: 1, num: '201', name: 'ISADORA MORENO', box: 'CROSS FORCE' },
                 { lane: 2, num: '202', name: 'THAYS FRANCA', box: 'CROSSFIT CASINHA VERDE' },
-                { lane: 3, num: '203', name: 'LUIZA DIAS', box: 'CROSSFIT PAMPULHA / BRAVE FITNESS' },
+                { lane: 3, num: '203', name: 'LUIZA DIAS', box: 'CROSSFIT PAMPULHA' },
                 { lane: 4, num: '204', name: 'JOANNA BOAVENTURA', box: 'MONSTER FACTORY' },
                 { lane: 5, num: '205', name: 'EMILY ANDRADE', box: 'BRAVE FITNESS FACTORY' },
-                { lane: 6, num: '206', name: 'ANDREIA PINHEIRO', box: 'CF ENDURANCE -/ BSBSTRONG' },
+                { lane: 6, num: '206', name: 'ANDREIA PINHEIRO', box: 'CF ENDURANCE' },
                 { lane: 7, num: '207', name: 'FABIANE CARVALHO', box: 'CROSSFIT PRAVATTI' },
                 { lane: 8, num: '208', name: 'MARINA ZAGO', box: 'CROSSFIT CONTAGEM' },
                 { lane: 9, num: '209', name: 'GABRIELA NANCI', box: 'VITTORIA CROSSFIT' },
                 { lane: 10, num: '213', name: 'LETICIA VICTOR', box: 'VITTORIA MOREREPS' },
                 { lane: 11, num: '211', name: 'GABRIELLA LUQUE', box: 'BOX 18' },
-                { lane: 12, num: '212', name: 'GABRIELA MACEDO CHAVES', box: 'VITTORIA CROSSFIT | MOREREPS' }
+                { lane: 12, num: '212', name: 'GABRIELA MACEDO CHAVES', box: 'VITTORIA CROSSFIT' }
             ]},
             { day: 'sexta', time: '20:00', warmup: '19:20', queue: '19:45', cap: "20'", cat: 'Elite Masculino (Single Heat)', tags: ['elite', 'masc'], workout: '#1', wodName: 'Load Management', athletes: [
                 { lane: 1, num: '101', name: 'VITOR LOFFI WAWRZENIAK', box: 'INDEPENTE' },
@@ -412,7 +414,7 @@
                 { lane: 2, num: '102', name: 'ELITE TRAINING CENTER', box: 'ELITE TRAINING CENTER' },
                 { lane: 3, num: '103', name: 'IRON SUPPS', box: 'WOHALI' }
             ]},
-            // Tarde Sábado
+            // Tarde Sábado - CLEAN KARMA
             { day: 'sabado', time: '13:50', warmup: '11:20', queue: '11:45', cap: "12'", cat: 'Quarteto Scaled Misto (Single Heat)', tags: ['scaled'], workout: '#4', wodName: 'Clean Karma', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
             { day: 'sabado', time: '14:12', warmup: '13:50', queue: '14:15', cap: "12'", cat: 'Quarteto Intermediario Misto (Single Heat)', tags: ['inter'], workout: '#4', wodName: 'Clean Karma', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
             { day: 'sabado', time: '14:29', warmup: '14:12', queue: '14:37', cap: "12'", cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#4', wodName: 'Clean Karma', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
@@ -420,6 +422,8 @@
             { day: 'sabado', time: '15:13', warmup: '14:46', queue: '15:11', cap: "12'", cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx'], workout: '#4', wodName: 'Clean Karma', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
             { day: 'sabado', time: '15:30', warmup: '15:13', queue: '15:38', cap: "12'", cat: 'Elite Feminino (Single Heat)', tags: ['elite'], workout: '#4', wodName: 'Clean Karma', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
             { day: 'sabado', time: '15:47', warmup: '15:30', queue: '15:55', cap: "12'", cat: 'Elite Masculino (Single Heat)', tags: ['elite'], workout: '#4', wodName: 'Clean Karma', athletes: [{ lane: '-', num: '', name: 'Ranking Dia 1', box: '-' }] },
+
+            // --- SABADO (13/12) FINAL DE TARDE (Charter) ---
             { day: 'sabado', time: '16:14', warmup: '15:47', queue: '16:12', cap: "10'", cat: 'Dupla Rx Mista (Heat 1)', tags: ['rx'], workout: '#5', wodName: 'Charter', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }] },
             { day: 'sabado', time: '16:29', warmup: '16:14', queue: '16:39', cap: "10'", cat: 'Dupla Rx Mista (Heat 2) & Dupla Rx Masculina (Heat 1)', tags: ['rx'], workout: '#5', wodName: 'Charter', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }] },
             { day: 'sabado', time: '16:44', warmup: '16:29', queue: '16:54', cap: "10'", cat: 'Dupla Rx Masculina (Heat 2)', tags: ['rx'], workout: '#5', wodName: 'Charter', athletes: [{ lane: '-', num: '', name: 'Ranking #4', box: '-' }] },
@@ -447,14 +451,20 @@
         /* ================== APP LOGIC ================== */
         const scheduleData = [...fridayData, ...saturdayData, ...sundayData];
 
-        let currentDay = 'sexta';
+        // Start on Saturday
+        let currentDay = 'sabado';
         let currentCat = 'all';
         let searchTerm = '';
 
         function render() {
             try {
                 const container = document.getElementById('timeline-container');
+                const errorMsg = document.getElementById('error-msg');
+                const forceBtn = document.getElementById('force-load');
+                
                 container.innerHTML = '';
+                if(errorMsg) errorMsg.style.display = 'none';
+                if(forceBtn) forceBtn.style.display = 'none';
 
                 let filtered = scheduleData.filter(item => {
                     const dayMatch = item.day === currentDay;
@@ -483,8 +493,9 @@
 
                 filtered.forEach((item, index) => {
                     const isFR = item.tags.includes('fr');
+                    const isCompleted = item.day === 'sexta';
                     const card = document.createElement('div');
-                    card.className = `heat-card ${isFR ? 'fr' : ''}`;
+                    card.className = `heat-card ${isFR ? 'fr' : ''} ${isCompleted ? 'completed' : ''}`;
                     if(searchTerm.length > 0) card.classList.add('open');
                     
                     let athletesHTML = '';
@@ -539,6 +550,12 @@
                         </span>
                     `;
 
+                    // Badge Completed
+                    let statusBadge = '';
+                    if (isCompleted) {
+                        statusBadge = `<div class="finished-badge">ENCERRADO</div>`;
+                    }
+
                     card.innerHTML = `
                         <div class="heat-header" onclick="toggleDetails(this)">
                             <div class="time-box">
@@ -546,6 +563,7 @@
                                 <span class="time-label">Horário</span>
                             </div>
                             <div class="heat-info">
+                                ${statusBadge}
                                 <h3>${item.cat}</h3>
                                 ${logisticBar}
                                 <div class="heat-meta">
@@ -564,8 +582,8 @@
             } catch (e) {
                 console.error(e);
                 document.getElementById('timeline-container').innerHTML = '';
-                document.getElementById('error-msg').style.display = 'block';
-                document.getElementById('force-load').style.display = 'block';
+                if(document.getElementById('error-msg')) document.getElementById('error-msg').style.display = 'block';
+                if(document.getElementById('force-load')) document.getElementById('force-load').style.display = 'block';
             }
         }
 
