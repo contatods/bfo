@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BFO Live • Domingo</title>
+    <title>BFO Live • Domingo Finais</title>
     <style>
         :root {
             --primary: #FF6D00;
@@ -45,6 +45,7 @@
         }
         .live-dot { width: 6px; height: 6px; background-color: #FF3D00; border-radius: 50%; }
 
+        /* Actions Scrollable */
         .quick-actions-wrapper {
             background: var(--bg-card); border-bottom: 1px solid var(--border);
             overflow-x: auto; scrollbar-width: none;
@@ -65,6 +66,7 @@
             text-align: center; white-space: normal; line-height: 1.2;
         }
 
+        /* Filters */
         .controls-wrapper {
             position: sticky; top: 63px; z-index: 90;
             background: var(--bg-body); padding-bottom: 5px; border-bottom: 1px solid #222;
@@ -99,6 +101,7 @@
         }
         .cat-pill.active { border-color: var(--primary); background: rgba(255, 109, 0, 0.1); color: var(--primary); }
 
+        /* Timeline */
         .timeline { padding: 10px 15px; min-height: 60vh; }
         
         .heat-card {
@@ -312,8 +315,8 @@
                 { lane: 4, num: '206', name: 'ANDREIA PINHEIRO', box: 'CF ENDURANCE -/ BSBSTRONG' },
                 { lane: 5, num: '202', name: 'THAYS FRANCA', box: 'CROSSFIT CASINHA VERDE' },
                 { lane: 6, num: '205', name: 'EMILY ANDRADE', box: 'BRAVE FITNESS FACTORY' },
-                { lane: 7, num: '203', name: 'LUIZA DIAS', box: 'CROSSFIT PAMPULHA' },
-                { lane: 8, num: '212', name: 'GABRIELA MACEDO CHAVES', box: 'VITTORIA CROSSFIT' },
+                { lane: 7, num: '203', name: 'LUIZA DIAS', box: 'CROSSFIT PAMPULHA/BRAVE FITNESS FACTORY' },
+                { lane: 8, num: '212', name: 'GABRIELA MACEDO CHAVES', box: 'VITTORIA CROSSFIT | MOREREPS TRAINING' },
                 { lane: 9, num: '211', name: 'GABRIELLA LUQUE', box: 'BOX 18' },
                 { lane: 10, num: '207', name: 'FABIANE CARVALHO', box: 'CROSSFIT PRAVATTI' },
                 { lane: 11, num: '201', name: 'ISADORA MORENO', box: 'CROSS FORCE' },
@@ -326,7 +329,7 @@
                 { lane: 4, num: '110', name: 'LUCAS DECIO', box: 'CROSS PRIMEFIT' },
                 { lane: 5, num: '106', name: 'HENRIQUE MOREIRA', box: 'INDEPENDENTE' },
                 { lane: 6, num: '101', name: 'VITOR LOFFI WAWRZENIAK', box: 'INDEPENTE' },
-                { lane: 7, num: '107', name: 'PEDRO MARTINS', box: 'CROSSFIT HIGIENOPOLIS' },
+                { lane: 7, num: '107', name: 'PEDRO MARTINS', box: 'CROSSFIT HIGIENOPOLIS/HERCULES FUNCIONAL' },
                 { lane: 8, num: '112', name: 'BENJAMIN GUTIERREZ', box: 'XOMMA FITNESS' },
                 { lane: 9, num: '104', name: 'DAN MOREIRA', box: 'SPARTA 1507' },
                 { lane: 10, num: '111', name: 'TIAGO OLIVEIRA', box: 'CF ENDURANCE' },
@@ -335,7 +338,7 @@
             ]},
 
             // --- TARDE (FINAIS) ---
-            { day: 'domingo', time: '10:28', warmup: '09:48', queue: '10:13', cap: "29'", cat: 'Quarteto Scaled Misto (Final)', tags: ['scaled'], workout: '#7', wodName: 'Elimination', athletes: [
+            { day: 'domingo', time: '10:28', warmup: '09:48', queue: '10:13', cap: "29'", cat: 'Quarteto Scaled Misto (Final Heat)', tags: ['scaled'], workout: '#7', wodName: 'Elimination/Final', athletes: [
                 { lane: 1, num: '611', name: 'DE ULTIMA HORA', box: 'CF TEAM SAVANAH' },
                 { lane: 2, num: '601', name: 'PESO, PENA, FORCA E FOLGA', box: 'HERA CF' },
                 { lane: 3, num: '606', name: 'ARARAS E MACHADOS', box: 'MACAW CF' },
@@ -348,7 +351,7 @@
                 { lane: 10, num: '605', name: 'TEAM SAVANAH', box: 'CF TEAM SAVANAH' },
                 { lane: 11, num: '610', name: 'JUST CROSS NOT FIT', box: 'NACAO CROSSFIT' }
             ]},
-            { day: 'domingo', time: '11:07', warmup: '10:27', queue: '10:52', cap: "29'", cat: 'Quarteto Intermediario Misto (Final)', tags: ['inter'], workout: '#7', wodName: 'Final', athletes: [
+            { day: 'domingo', time: '11:07', warmup: '10:27', queue: '10:52', cap: "29'", cat: 'Quarteto Intermediario Misto (Final Heat)', tags: ['inter'], workout: '#7', wodName: 'Final', athletes: [
                 { lane: 3, num: '507', name: 'UNBROKEN', box: 'UNBROKEN FUNCTIONAL FITNESS' },
                 { lane: 4, num: '504', name: 'ROUND 4', box: 'GRIFO CROSSFIT' },
                 { lane: 5, num: '501', name: 'CROSSFIT PARK EXTREME', box: 'CROSSFIT PARK EXTREME' },
@@ -357,21 +360,21 @@
                 { lane: 8, num: '505', name: 'OS IMPARAVEIS', box: 'ELITE TRAINING CENTER' },
                 { lane: 9, num: '503', name: 'TEAM CF1000', box: 'CF1000' }
             ]},
-            { day: 'domingo', time: '11:46', warmup: '11:06', queue: '11:31', cap: "29'", cat: 'Dupla Rx Mista (Final)', tags: ['rx'], workout: '#7', wodName: 'Final', athletes: [
+            { day: 'domingo', time: '11:46', warmup: '11:06', queue: '11:31', cap: "29'", cat: 'Dupla Rx Mista (Final Heat)', tags: ['rx'], workout: '#7', wodName: 'Final', athletes: [
                 { lane: 1, num: '302', name: 'TEAM HERCULES', box: 'CROSSFIT RIVEN' },
-                { lane: 2, num: '310', name: 'KAPELA GYM/HERCULESFUNCTIONAL', box: 'KAPELA GYM' },
+                { lane: 2, num: '310', name: 'KAPELA GYM/HERCULES', box: 'KAPELA GYM' },
                 { lane: 3, num: '304', name: 'MONSTERS', box: 'CF MONSTER' },
-                { lane: 4, num: '311', name: 'ADRIANO E BIANCA', box: 'MACAW CF & CROSSFIT UNAI' },
+                { lane: 4, num: '311', name: 'ADRIANO E BIANCA', box: 'MACAW CF' },
                 { lane: 5, num: '313', name: 'IT\'S SHOW TIME', box: 'CROSSFIT BETIM' },
                 { lane: 6, num: '309', name: 'TEAM KAPELA', box: 'KAPELA GYM' },
                 { lane: 7, num: '314', name: 'TEAM HERCULES MASTER', box: 'PIER CF' },
-                { lane: 8, num: '301', name: 'SCHAMNE COMP', box: 'BLOCK COMMUNITY FITNESS' },
+                { lane: 8, num: '301', name: 'SCHAMNE COMP', box: 'BLOCK COMMUNITY' },
                 { lane: 9, num: '303', name: 'CROSSFIT PARK EXTREME.', box: 'CROSSFIT PARK EXTREME' },
                 { lane: 10, num: '305', name: 'HERA/CLA', box: 'HERA CF' },
                 { lane: 11, num: '315', name: 'HERCULES-POWER COUPLE', box: 'HERCULES FUNCTIONAL' },
                 { lane: 12, num: '308', name: 'TEAM NACAO', box: 'NACAO CROSSFIT' }
             ]},
-            { day: 'domingo', time: '12:25', warmup: '11:45', queue: '12:10', cap: "29'", cat: 'Dupla Rx Masculina (Final)', tags: ['rx'], workout: '#7', wodName: 'Final', athletes: [
+            { day: 'domingo', time: '12:25', warmup: '11:45', queue: '12:10', cap: "29'", cat: 'Dupla Rx Masculina (Final Heat)', tags: ['rx'], workout: '#7', wodName: 'Final', athletes: [
                 { lane: 1, num: '410', name: 'MASTER PAIN', box: 'HERCULES FUNCIONAL' },
                 { lane: 2, num: '405', name: 'MARDUK', box: 'CROSSFIT MARDUK' },
                 { lane: 3, num: '412', name: 'WOHALI', box: 'WOHALI' },
@@ -381,11 +384,11 @@
                 { lane: 7, num: '404', name: 'TIMAO E PUMBA', box: 'ALEXANDRE.AES' },
                 { lane: 8, num: '403', name: 'SE QUEBRAR JA SABE', box: 'HERCULES FUNCTIONAL' },
                 { lane: 9, num: '407', name: 'ROLO COMPRESSOR', box: 'CF CURVELO' },
-                { lane: 10, num: '413', name: 'TEAM CECOSTA', box: 'CF COSTA' },
+                { lane: 10, num: '413', name: 'TEAM CFCOSTA', box: 'CF COSTA' },
                 { lane: 11, num: '408', name: 'DEDE E RAYAN', box: 'MACHADO CROSSFIT' },
                 { lane: 12, num: '411', name: 'GABRIEL E PEDRO', box: 'UNBROKEN' }
             ]},
-            { day: 'domingo', time: '13:04', warmup: '12:24', queue: '12:49', cap: "23'", cat: 'Elite Feminino (Final)', tags: ['elite'], workout: '#7', wodName: 'Final', athletes: [
+            { day: 'domingo', time: '13:04', warmup: '12:24', queue: '12:49', cap: "23'", cat: 'Elite Feminino (Final Heat)', tags: ['elite'], workout: '#7', wodName: 'Final', athletes: [
                 { lane: 1, num: '201', name: 'ISADORA MORENO', box: 'CROSS FORCE' },
                 { lane: 2, num: '207', name: 'FABIANE CARVALHO', box: 'CROSSFIT PRAVATTI' },
                 { lane: 3, num: '213', name: 'LETICIA VICTOR', box: 'VITTORIA MOREREPS' },
@@ -393,13 +396,26 @@
                 { lane: 5, num: '206', name: 'ANDREIA PINHEIRO', box: 'CF ENDURANCE' },
                 { lane: 6, num: '205', name: 'EMILY ANDRADE', box: 'BRAVE FITNESS FACTORY' },
                 { lane: 7, num: '203', name: 'LUIZA DIAS', box: 'CROSSFIT PAMPULHA' },
-                { lane: 8, num: '202', name: 'THAYS FRANCA', box: 'CROSSFIT CASINHA VERDE' },
-                { lane: 9, num: '212', name: 'GABRIELA MACEDO CHAVES', box: 'VITTORIA CROSSFIT' },
+                { lane: 8, num: '202', name: 'THAYS FRANCA', box: 'CASINHA VERDE' },
+                { lane: 9, num: '212', name: 'GABRIELA MACEDO', box: 'VITTORIA CROSSFIT' },
                 { lane: 10, num: '204', name: 'JOANNA BOAVENTURA', box: 'MONSTER FACTORY' },
                 { lane: 11, num: '208', name: 'MARINA ZAGO', box: 'CROSSFIT CONTAGEM' },
                 { lane: 12, num: '209', name: 'GABRIELA NANCI', box: 'VITTORIA CROSSFIT' }
             ]},
-            { day: 'domingo', time: '13:37', warmup: '12:57', queue: '13:22', cap: "23'", cat: 'Elite Masculino (Final)', tags: ['elite'], workout: '#7', wodName: 'Final', athletes: [{ lane: '-', num: '', name: 'Finalistas (A Definir)', box: '-' }] }
+            { day: 'domingo', time: '13:37', warmup: '12:57', queue: '13:22', cap: "23'", cat: 'Elite Masculino (Final Heat)', tags: ['elite'], workout: '#7', wodName: 'Final', athletes: [
+                { lane: 1, num: '103', name: 'MATEUS ROMAO', box: 'CROSSFIT MONSTROS' },
+                { lane: 2, num: '105', name: 'JUNINHO DE PAULA', box: 'BRAVE FITNESS' },
+                { lane: 3, num: '104', name: 'DAN MOREIRA', box: 'SPARTA 1507' },
+                { lane: 4, num: '108', name: 'BERNARDO TORQUATO', box: 'MUTARE' },
+                { lane: 5, num: '106', name: 'HENRIQUE MOREIRA', box: 'INDEPENDENTE' },
+                { lane: 6, num: '101', name: 'VITOR LOFFI', box: 'INDEPENDENTE' },
+                { lane: 7, num: '112', name: 'BENJAMIN GUTIERREZ', box: 'XOMMA FITNESS' },
+                { lane: 8, num: '107', name: 'PEDRO MARTINS', box: 'HIGIENOPOLIS' },
+                { lane: 9, num: '110', name: 'LUCAS DECIO', box: 'CROSS PRIMEFIT' },
+                { lane: 10, num: '109', name: 'MATHEUS GOMES', box: 'VITTORIA CROSSFIT' },
+                { lane: 11, num: '111', name: 'TIAGO OLIVEIRA', box: 'CF ENDURANCE' },
+                { lane: 12, num: '102', name: 'RICARDO MARQUEZ', box: 'BE HAPPY' }
+            ]}
         ];
 
         let currentCat = 'all';
